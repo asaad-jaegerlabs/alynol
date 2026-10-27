@@ -1,0 +1,941 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<title>Evermore Unified Product</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..600,0..100,0..1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one long editorial document on warm paper. A left "margin rail" of eyebrows at desktop width,
+   full-bleed ink bands for the chapters that change register, and a sticky chapter nav. */
+:root{
+  --paper:#F4EFE6; --paper-2:#EAE2D4; --paper-3:#DED3C0; --white:#FFFDF8;
+  --ink:#1D1B18; --ink-2:#4A453D; --ink-3:#6B675C; --rule:#CBBFAB;
+  --clay:#B8543A; --brick:#9E3A22; --apricot:#EE9A7C; --apricot-2:#E9C9A4;
+  --forest:#26322A; --moss:#46574A; --moss-2:#8FA892; --sand:#E3D9C6;
+  --night:#171613; --night-2:#211F1B; --night-ink:#EFE7DA;
+  --ok:#2F5A3A; --warn:#6A4B14; --focus:#0F62C9;
+  --f-display:"Fraunces",Georgia,"Iowan Old Style","Times New Roman",serif;
+  --f-text:"Instrument Sans","Hanken Grotesk","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --shell:min(1180px,100%);
+  --measure:66ch;
+  --t-fast:180ms cubic-bezier(.2,.7,.3,1);
+  --t-slow:650ms cubic-bezier(.16,.84,.26,1);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#16160F; --paper-2:#1E1D16; --paper-3:#27261D; --white:#1B1A13;
+    --ink:#F2ECE0; --ink-2:#DDD5C6; --ink-3:#A39C8C; --rule:#35342A;
+    --clay:#E08A68; --brick:#D98B6A; --apricot:#EE9A7C; --apricot-2:#B88A66;
+    --forest:#2E3B31; --moss:#8FA892; --moss-2:#46574A; --sand:#2B2A20;
+    --night:#0F0F0A; --night-2:#171710; --night-ink:#EFE7DA;
+    --ok:#9CC7A5; --warn:#D9B46A; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#16160F; --paper-2:#1E1D16; --paper-3:#27261D; --white:#1B1A13;
+  --ink:#F2ECE0; --ink-2:#DDD5C6; --ink-3:#A39C8C; --rule:#35342A;
+  --clay:#E08A68; --brick:#D98B6A; --apricot:#EE9A7C; --apricot-2:#B88A66;
+  --forest:#2E3B31; --moss:#8FA892; --moss-2:#46574A; --sand:#2B2A20;
+  --night:#0F0F0A; --night-2:#171710; --night-ink:#EFE7DA;
+  --ok:#9CC7A5; --warn:#D9B46A; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-text);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:500;line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(40px,7vw,86px);font-variation-settings:"opsz" 144,"SOFT" 30,"WONK" 1}
+h2{font-size:clamp(30px,4.4vw,52px);font-variation-settings:"opsz" 96,"SOFT" 20}
+h3{font-size:clamp(22px,2.4vw,30px);font-variation-settings:"opsz" 48}
+h4{font-size:19px;font-family:var(--f-text);font-weight:600;letter-spacing:0}
+p{margin:0}
+a{color:var(--clay);text-underline-offset:3px}
+a:hover{color:var(--brick)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:2px}
+em{font-style:italic}
+.i{font-style:italic;font-variation-settings:"opsz" 144,"SOFT" 60,"WONK" 1;color:var(--clay)}
+.wrap{width:var(--shell);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section.sec{padding-block:clamp(56px,8vw,112px);border-top:1px solid var(--rule)}
+section.sec.band{border-top:0;background:var(--night);color:var(--night-ink)}
+section.sec.band h2,section.sec.band h3{color:var(--night-ink)}
+section.sec.band a{color:var(--apricot)}
+section.sec.band .lede,section.sec.band .muted{color:#C9C1B0}
+section.sec.forest{border-top:0;background:var(--forest);color:var(--night-ink)}
+section.sec.forest h2,section.sec.forest h3{color:var(--night-ink)}
+section.sec.forest a{color:var(--apricot)}
+section.sec.forest .lede,section.sec.forest .muted{color:#C9C8B6}
+.eyebrow{font-family:var(--f-text);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:14px;display:flex;gap:10px;align-items:center}
+.eyebrow::before{content:"";width:22px;height:1px;background:currentColor}
+.band .eyebrow,.forest .eyebrow{color:var(--apricot)}
+.lede{font-size:clamp(18px,1.6vw,22px);line-height:1.5;color:var(--ink-2);max-width:var(--measure);margin-top:18px}
+.prose{max-width:var(--measure)}
+.prose p+p{margin-top:14px}
+.muted{color:var(--ink-3)}
+.small{font-size:14px}
+.mono{font-family:var(--f-mono);font-size:.92em}
+.grid{display:grid;gap:22px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
+.grid>*{min-width:0}
+.card{background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:22px}
+.band .card,.forest .card{background:var(--night-2);border-color:#3A382F;color:var(--night-ink)}
+.forest .card{background:#1F2A23;border-color:#3B4A3F}
+.card h4{margin-bottom:8px}
+.card p{color:var(--ink-2);font-size:15.5px}
+.band .card p,.forest .card p{color:#C9C1B0}
+.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px;border:1px solid currentColor;line-height:1.4}
+.tag.eden{color:#5C6B3F}.tag.ever{color:var(--brick)}.tag.tog{color:var(--moss)}.tag.new{color:var(--focus)}
+.band .tag.eden,.forest .tag.eden{color:#B9C98E}.band .tag.ever,.forest .tag.ever{color:var(--apricot)}.band .tag.tog,.forest .tag.tog{color:#9FB9A3}.band .tag.new,.forest .tag.new{color:#9CC4F5}
+.src{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:2px;margin-left:6px;vertical-align:middle}
+.src.sourced{background:#DDE9DF;color:var(--ok)}.src.modelled{background:#F0E4C8;color:var(--warn)}.src.uncited{background:var(--paper-3);color:var(--ink-2)}
+.band .src.sourced,.forest .src.sourced{background:#2A3D2E;color:#B6D7BC}.band .src.modelled,.forest .src.modelled{background:#4A3A18;color:#EBD29A}.band .src.uncited,.forest .src.uncited{background:#3A382F;color:#D9D1C0}
+sup.ref a{text-decoration:none;font-family:var(--f-mono);font-size:11px;color:var(--clay);padding:0 2px}
+figure{margin:0}
+figcaption{font-size:13.5px;color:var(--ink-3);margin-top:10px;line-height:1.45}
+.band figcaption,.forest figcaption{color:#A39C8C}
+img{max-width:100%;height:auto;display:block}
+.photo{border-radius:4px;overflow:hidden;background:var(--paper-3);aspect-ratio:3/2}
+.photo img{width:100%;height:100%;object-fit:cover}
+.photo.tall{aspect-ratio:4/5}
+.photo.wide{aspect-ratio:21/9}
+.arch{border-radius:999px 999px 4px 4px}
+.diagram{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:var(--white);padding:12px}
+.band .diagram,.forest .diagram{background:var(--night-2);border-color:#3A382F}
+.diagram svg{display:block;width:100%;height:auto;min-width:540px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px 10px 0;border-bottom:1px solid var(--rule)}
+th{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.tablewrap{overflow-x:auto}
+.tablewrap table{min-width:640px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);border:0;border-radius:999px;padding:12px 20px;font:600 15px var(--f-text);cursor:pointer;min-height:44px;text-decoration:none;transition:transform var(--t-fast),background var(--t-fast)}
+.btn:hover{transform:translateY(-1px);color:var(--paper)}
+.btn.peach{background:var(--apricot);color:#2A1F14}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--rule)}
+.band .btn.ghost,.forest .btn.ghost{color:var(--night-ink);border-color:#5A574B}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+nav.toc a{white-space:nowrap;text-decoration:none;color:var(--ink-2);font-size:13.5px;font-weight:500;padding:8px 12px;border-radius:999px;min-height:36px;display:inline-flex;align-items:center}
+nav.toc a:hover{background:var(--paper-2);color:var(--ink)}
+nav.toc a.brand{font-family:var(--f-display);font-size:18px;color:var(--ink);padding-left:0;gap:8px}
+.mark{width:26px;height:26px;flex:none}
+.hero{padding-block:clamp(48px,7vw,96px) clamp(40px,6vw,80px)}
+.hero .grid{grid-template-columns:1.2fr .8fr;align-items:center}
+@media (max-width:860px){.hero .grid{grid-template-columns:1fr}}
+.kicker{font-family:var(--f-display);font-style:italic;font-size:clamp(20px,2.2vw,26px);color:var(--clay);margin-top:16px;font-variation-settings:"opsz" 72,"SOFT" 50,"WONK" 1}
+.status{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.status span{font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border:1px solid var(--rule);border-radius:2px;color:var(--ink-2);background:var(--white)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:0;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:var(--white)}
+.steps>div{padding:20px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.steps .n{font-family:var(--f-display);font-size:40px;color:var(--clay);line-height:1;font-variation-settings:"opsz" 144,"WONK" 1}
+.steps h4{margin:10px 0 6px}
+.steps p{font-size:14.5px;color:var(--ink-2)}
+.callout{border-left:3px solid var(--clay);padding:14px 18px;background:var(--white);border-radius:0 4px 4px 0;max-width:var(--measure)}
+.band .callout,.forest .callout{background:var(--night-2);border-left-color:var(--apricot)}
+.kv{display:grid;grid-template-columns:max-content 1fr;gap:6px 18px;font-size:15px}
+.kv dt{color:var(--ink-3);font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding-top:2px}
+.kv dd{margin:0}
+.never{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:18px}
+.never div{border-top:1px solid #3A382F;padding-top:14px}
+.never b{display:block;font-family:var(--f-display);font-size:22px;font-weight:500;margin-bottom:6px;color:var(--apricot)}
+.never p{color:#C9C1B0;font-size:15px}
+.demo{background:var(--white);border:1px solid var(--rule);border-radius:6px;padding:20px;box-shadow:0 1px 0 var(--rule)}
+.band .demo,.forest .demo{background:var(--night-2);border-color:#3A382F}
+.demo .dh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.demo .dh b{font-family:var(--f-display);font-size:20px;font-weight:500}
+.demo .dh span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.vote{display:flex;gap:8px;flex-wrap:wrap}
+.vote button{border:1px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:999px;padding:9px 14px;font:600 14px var(--f-text);cursor:pointer;min-height:40px;min-width:40px}
+.vote button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.band .vote button,.forest .vote button{background:var(--night);color:var(--night-ink);border-color:#5A574B}
+.band .vote button[aria-pressed="true"],.forest .vote button[aria-pressed="true"]{background:var(--apricot);color:#2A1F14;border-color:var(--apricot)}
+.sealed{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-3)}
+.sealed::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--apricot);box-shadow:inset 0 0 0 3px var(--white)}
+.result{margin-top:12px;padding:12px 14px;border-radius:4px;background:var(--paper-2);font-size:15px}
+.band .result,.forest .result{background:#2A2922}
+.result.yes{background:#DDE9DF;color:var(--ok)}
+.band .result.yes,.forest .result.yes{background:#2A3D2E;color:#B6D7BC}
+.meter{height:10px;background:var(--paper-3);border-radius:999px;overflow:hidden}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--moss),var(--moss-2));width:0;transition:width var(--t-slow)}
+.band .meter,.forest .meter{background:#2A2922}
+.bars{display:grid;gap:8px}
+.bars div{display:grid;grid-template-columns:150px 1fr 52px;gap:10px;align-items:center;font-size:14px}
+.bars .b{height:12px;background:var(--paper-3);border-radius:2px;overflow:hidden}
+.bars .b i{display:block;height:100%;background:var(--clay)}
+.bars .v{font-family:var(--f-mono);font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:520px){.bars div{grid-template-columns:110px 1fr 44px}}
+.refs{columns:2;column-gap:40px;font-size:14px;line-height:1.5}
+@media (max-width:760px){.refs{columns:1}}
+.refs li{break-inside:avoid;margin-bottom:10px;padding-left:4px}
+.refs li::marker{font-family:var(--f-mono);color:var(--clay)}
+.credits{font-size:13px;color:var(--ink-3);columns:3;column-gap:30px}
+@media (max-width:760px){.credits{columns:1}}
+footer{padding-block:40px 60px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink-3)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.two>*{min-width:0}
+.epic>*{min-width:0}
+@media (max-width:820px){.two{grid-template-columns:1fr}}
+.half{border-radius:4px;padding:26px}
+.half.a{background:var(--forest);color:#F1EADD}
+.half.b{background:var(--apricot-2);color:#2A1F14}
+.half h3{margin-bottom:8px;color:inherit}
+.half p{font-size:15px;opacity:.9}
+.screens{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:14px}
+.screens figure img{border-radius:14px;border:1px solid var(--rule);background:#111}
+.screens figcaption{font-size:12.5px}
+.phone{width:min(100%,330px);margin:0 auto;border-radius:28px;border:1px solid var(--rule);background:var(--night);padding:10px;box-shadow:0 20px 60px rgba(0,0,0,.18)}
+.phone .scr{background:var(--paper);border-radius:20px;overflow:hidden;min-height:420px;position:relative}
+.toc-h{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.prov{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:0;font-size:14.5px}
+.prov>div{padding:9px 10px 9px 0;border-bottom:1px solid var(--rule)}
+.prov .h{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+@media (max-width:640px){.prov{grid-template-columns:1fr}.prov .h:not(:first-child){display:none}.prov>div{border-bottom:0}.prov>div:nth-child(3n){border-bottom:1px solid var(--rule);padding-bottom:14px}}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;background:var(--paper-2);font-size:13px;font-weight:500;margin:2px 4px 2px 0}
+.band .pill,.forest .pill{background:#2A2922}
+.ac{font-size:14.5px}
+.ac li{margin-bottom:6px}
+.epics{counter-reset:ep}
+.epic{border:1px solid var(--rule);border-radius:4px;padding:18px 20px;background:var(--white);display:grid;grid-template-columns:56px 1fr auto;gap:16px;align-items:start}
+.epic::before{counter-increment:ep;content:"E" counter(ep);font-family:var(--f-mono);font-size:14px;color:var(--clay);padding-top:4px}
+.epic h4{margin-bottom:4px}
+.epic p{font-size:14.5px;color:var(--ink-2)}
+.epic .m{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600;white-space:nowrap}
+@media (max-width:640px){.epic{grid-template-columns:40px 1fr}.epic .m{grid-column:2}}
+</style>
+<nav class="toc" aria-label="Sections"><div class="wrap">
+<a class="brand" href="#top"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 30V16a12 12 0 0 1 12-12v26z" fill="#26322A"/><path d="M28 30V16A12 12 0 0 0 16 4v26z" fill="#EE9A7C"/><rect x="15.4" y="4" width="1.2" height="26" fill="#F4EFE6"/></svg>Evermore</a>
+<a href="#why">Why</a><a href="#merge">Three into one</a><a href="#journey">The journey</a><a href="#demo">Demo</a><a href="#science">The science</a><a href="#design">Design</a><a href="#arch">Architecture</a><a href="#safety">Safety &amp; privacy</a><a href="#plan">Build plan</a><a href="#sources">Sources</a>
+</div></nav>
+
+<header id="top" class="hero"><div class="wrap">
+<div class="grid">
+<div>
+<div class="eyebrow">Unified product document · 27 October 2026 · v1.0</div>
+<h1>Evermore</h1>
+<p class="kicker">From the first sealed letter to the fiftieth anniversary.</p>
+<p class="lede">One app that carries two people the whole way: a considered introduction, a garden that grows while you get to know each other, and a shared space where you keep deciding, together, for years. It combines everything built across three repositories, <strong>Evermore</strong> (tradWives), <strong>Eden</strong> (matchmaker) and <strong>Together</strong> (alynol), into one continuous arc. No feature is dropped; every one is given a place where it flows into the next.</p>
+<div class="status"><span>3 repos merged</span><span>78 features mapped</span><span>6 chapters</span><span>32 sources</span><span>14 epics · 61 issues</span></div>
+<p class="small muted" style="margin-top:18px">A product and build document for Ali and Dominick. Figures carry their label: <span class="src sourced">sourced</span><span class="src modelled">modelled</span><span class="src uncited">uncited</span>, the convention already used across the Evermore repository.</p>
+</div>
+<figure>
+<div class="photo tall arch"><img src="img/pexels-19793454.jpg" width="800" height="1000" alt="Two people walking hand in hand along a city street, seen from behind"></div>
+<figcaption>Photographs on this page are licensed under the Pexels License or CC0 and credited at the end. The people pictured are not members.</figcaption>
+</figure>
+</div>
+</div></header>
+
+<section class="sec" id="why"><div class="wrap">
+<div class="eyebrow">01 · The purpose</div>
+<h2>Dating apps end at the match. Couples apps start years later. Nobody owns the middle.</h2>
+<p class="lede">Three teams built three answers to three stages of the same relationship. Put end to end they describe one product: a way to meet on purpose, a way to become close before you meet, and a way to keep choosing each other afterwards.</p>
+<div class="grid g3" style="margin-top:36px">
+<div class="card"><h4>Meeting is exhausting and unsafe</h4><p>78% of dating-app users report burnout<span class="src sourced">sourced</span><sup class="ref"><a href="#s14">14</a></sup>. 48% have met at least one of four harassing behaviours on an app; women under 50 far more<span class="src sourced">sourced</span><sup class="ref"><a href="#s13">13</a></sup>. The swipe deck optimises for optionality, so the real questions are asked last. Evermore's answer: roles and non-negotiables first, three sealed letters a day, a yes that is private until it is mutual.</p></div>
+<div class="card"><h4>Matching is the easy part</h4><p>No matching algorithm has published evidence that it predicts who will click<span class="src sourced">sourced</span><sup class="ref"><a href="#s11">11</a></sup>; machine learning on 100+ traits forecasts how desirable people are in general but not which pair will want each other<span class="src sourced">sourced</span><sup class="ref"><a href="#s12">12</a></sup>. What does build closeness is structured, reciprocal, escalating disclosure<span class="src sourced">sourced</span><sup class="ref"><a href="#s1">1</a></sup>. Eden's answer: a garden of activities where neither person sees the other's answer until both have written theirs.</p></div>
+<div class="card"><h4>Then the polite stalemate</h4><p>One person suggests, the other says "sure, whatever you want", and by Thursday the plan is gone. Relationship quality declines after the honeymoon unless couples keep doing new things together<span class="src sourced">sourced</span><sup class="ref"><a href="#s2">2</a></sup>, and people underrate how much they will treasure ordinary days later<span class="src sourced">sourced</span><sup class="ref"><a href="#s5">5</a></sup>. Together's answer: double-blind deciding on real plans, a shared calendar, memories and sealed notes.</p></div>
+</div>
+<div class="two" style="margin-top:40px">
+<div class="prose">
+<h3>The thesis</h3>
+<p style="margin-top:12px">The same mechanic runs through all three products and nobody had noticed: <strong>neither answer is shown until both exist.</strong> Evermore seals the yes. Eden seals the activity answer. Together seals the vote on a date. It is one idea applied at three distances, and it is the idea that makes honesty cheap: you answer for yourself, not in response to them.</p>
+<p>So the unified Evermore is built around one primitive, the <em>sealed answer</em>, and one metaphor that both brands already shared, <em>two halves meeting at a seam</em>: the arch, the two-sided mark, the split hero. Everything else is a chapter of the same story.</p>
+<p>What this document does: writes back the understanding of all three codebases, maps every feature to its new home, specifies the journey, the science, the design language and the architecture, and breaks the build into epics and issues with acceptance criteria.</p>
+</div>
+<figure><div class="photo"><img src="img/pexels-36765874.jpg" width="1200" height="800" alt="Hands sorting printed photographs on a table"></div><figcaption>Memories, the end of the arc: finished plans become a collection that gets better the longer you leave it alone.</figcaption></figure>
+</div>
+</div></section>
+<section class="sec" id="merge"><div class="wrap">
+<div class="eyebrow">02 · Three into one</div>
+<h2>What each repository brought, and where it now lives.</h2>
+<p class="lede">The three products were never competitors. Read in order they are the beginning, the middle and the long tail of one relationship. The diagram shows the merge; the table below it is the full inventory, so nothing is lost in the move.</p>
+
+<figure class="diagram" style="margin-top:32px" aria-labelledby="mergecap">
+<svg viewBox="0 0 1080 420" role="img" aria-label="Three products converging into the six chapters of one Evermore arc">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5 0 10z" fill="#6B675C"/></marker></defs>
+<g font-family="Instrument Sans,system-ui,sans-serif" font-size="13">
+<rect x="20" y="40" width="300" height="96" rx="4" fill="#26322A"/><text x="36" y="66" fill="#EE9A7C" font-size="11" letter-spacing="2">EVERMORE · TRADWIVES</text><text x="36" y="90" fill="#F4EFE6" font-size="17" font-family="Fraunces,Georgia,serif">Meet on purpose</text><text x="36" y="112" fill="#D9D1C0">Roles, non-negotiables, 3 sealed letters/day, Proving,</text><text x="36" y="128" fill="#D9D1C0">vouching, Chapters, safety queue, owners suite</text>
+<rect x="20" y="162" width="300" height="96" rx="4" fill="#5C6B3F"/><text x="36" y="188" fill="#EFE7DA" font-size="11" letter-spacing="2">EDEN · MATCHMAKER</text><text x="36" y="212" fill="#F4EFE6" font-size="17" font-family="Fraunces,Georgia,serif">Become close before meeting</text><text x="36" y="234" fill="#E6EAD8">38 activities, both-answer-before-reveal, garden,</text><text x="36" y="250" fill="#E6EAD8">7-dimension scoring, insights, date designer, premium</text>
+<rect x="20" y="284" width="300" height="96" rx="4" fill="#B8543A"/><text x="36" y="310" fill="#F9E3D6" font-size="11" letter-spacing="2">TOGETHER · ALYNOL</text><text x="36" y="334" fill="#FFF6EE" font-size="17" font-family="Fraunces,Georgia,serif">Keep choosing each other</text><text x="36" y="356" fill="#F9E3D6">Double-blind deciding, dates, trips, upcoming, memories,</text><text x="36" y="372" fill="#F9E3D6">sealed notes, export, demo mode, weekly discovery</text>
+<path d="M320 88 C420 88 400 210 470 210" fill="none" stroke="#6B675C" stroke-width="1.5" marker-end="url(#ar)"/>
+<path d="M320 210 L470 210" fill="none" stroke="#6B675C" stroke-width="1.5" marker-end="url(#ar)"/>
+<path d="M320 332 C420 332 400 210 470 210" fill="none" stroke="#6B675C" stroke-width="1.5" marker-end="url(#ar)"/>
+<circle cx="500" cy="210" r="28" fill="#F4EFE6" stroke="#CBBFAB"/><path d="M486 224V210a14 14 0 0 1 14-14v28z" fill="#26322A"/><path d="M514 224V210a14 14 0 0 0-14-14v28z" fill="#EE9A7C"/>
+<text x="500" y="258" text-anchor="middle" fill="#1D1B18" font-size="12" font-weight="600">THE SEALED ANSWER</text>
+<path d="M528 210 L570 210" fill="none" stroke="#6B675C" stroke-width="1.5" marker-end="url(#ar)"/>
+<g id="chapters">
+<rect x="580" y="40" width="480" height="340" rx="4" fill="#FFFDF8" stroke="#CBBFAB"/>
+<text x="600" y="64" fill="#B8543A" font-size="11" letter-spacing="2">ONE ARC · SIX CHAPTERS</text>
+<g transform="translate(600,80)">
+<rect width="440" height="40" rx="3" fill="#F4EFE6"/><text x="12" y="17" font-size="14" font-weight="600" fill="#1D1B18">0 · Doorway</text><text x="12" y="32" fill="#4A453D" font-size="12">Role, non-negotiables, three games, seed, Proving</text><rect x="360" y="12" width="68" height="16" rx="8" fill="#26322A"/><text x="394" y="23.5" text-anchor="middle" fill="#F4EFE6" font-size="9" letter-spacing="1">EVER+EDEN</text>
+</g>
+<g transform="translate(600,128)">
+<rect width="440" height="40" rx="3" fill="#F4EFE6"/><text x="12" y="17" font-size="14" font-weight="600" fill="#1D1B18">1 · Letters</text><text x="12" y="32" fill="#4A453D" font-size="12">Three sealed introductions a day, mutual seal</text><rect x="360" y="12" width="68" height="16" rx="8" fill="#26322A"/><text x="394" y="23.5" text-anchor="middle" fill="#F4EFE6" font-size="9" letter-spacing="1">EVERMORE</text>
+</g>
+<g transform="translate(600,176)">
+<rect width="440" height="40" rx="3" fill="#F4EFE6"/><text x="12" y="17" font-size="14" font-weight="600" fill="#1D1B18">2 · The Garden</text><text x="12" y="32" fill="#4A453D" font-size="12">Activities, reveal, growth, conversation, photo window</text><rect x="360" y="12" width="68" height="16" rx="8" fill="#5C6B3F"/><text x="394" y="23.5" text-anchor="middle" fill="#F4EFE6" font-size="9" letter-spacing="1">EDEN</text>
+</g>
+<g transform="translate(600,224)">
+<rect width="440" height="40" rx="3" fill="#F4EFE6"/><text x="12" y="17" font-size="14" font-weight="600" fill="#1D1B18">3 · The Bridge</text><text x="12" y="32" fill="#4A453D" font-size="12">Bloom, intentions, first date decided double-blind</text><rect x="360" y="12" width="68" height="16" rx="8" fill="#B8543A"/><text x="394" y="23.5" text-anchor="middle" fill="#F4EFE6" font-size="9" letter-spacing="1">ALL THREE</text>
+</g>
+<g transform="translate(600,272)">
+<rect width="440" height="40" rx="3" fill="#F4EFE6"/><text x="12" y="17" font-size="14" font-weight="600" fill="#1D1B18">4 · Together</text><text x="12" y="32" fill="#4A453D" font-size="12">Dates, trips, upcoming, memories, notes for later</text><rect x="360" y="12" width="68" height="16" rx="8" fill="#B8543A"/><text x="394" y="23.5" text-anchor="middle" fill="#F4EFE6" font-size="9" letter-spacing="1">TOGETHER</text>
+</g>
+<g transform="translate(600,320)">
+<rect width="440" height="40" rx="3" fill="#F4EFE6"/><text x="12" y="17" font-size="14" font-weight="600" fill="#1D1B18">5 · Chapters</text><text x="12" y="32" fill="#4A453D" font-size="12">Verified local gatherings; feed the weekly discovery</text><rect x="360" y="12" width="68" height="16" rx="8" fill="#26322A"/><text x="394" y="23.5" text-anchor="middle" fill="#F4EFE6" font-size="9" letter-spacing="1">EVERMORE</text>
+</g>
+</g>
+<text x="20" y="408" fill="#6B675C" font-size="11">Across every chapter: trust &amp; safety, privacy, the owners suite, the marketing site, the design system.</text>
+</g>
+</svg>
+<figcaption id="mergecap">The merge. Three codebases, one primitive, six chapters. Cross-cutting systems run underneath all of them.</figcaption>
+</figure>
+
+<h3 style="margin-top:56px">Feature provenance</h3>
+<p class="muted" style="max-width:var(--measure);margin-top:8px">Every feature found in the three repositories, where it came from, and where it lives in the unified app. Tags: <span class="tag ever">Evermore</span> <span class="tag eden">Eden</span> <span class="tag tog">Together</span> <span class="tag new">New seam</span> (added only to join two existing features).</p>
+
+<div class="prov" style="margin-top:18px">
+<div class="h">Feature</div><div class="h">Origin</div><div class="h">Now lives in</div>
+<div><b>Try the reveal before registering</b> (welcome carousel card 3)</div><div><span class="tag eden">Eden</span></div><div>Doorway · welcome, plus the marketing hero</div>
+<div><b>Invite-only accounts</b>, 2 codes per member, 72 h vesting, seed and revoke</div><div><span class="tag ever">Evermore</span></div><div>Doorway · account</div>
+<div><b>18+ by date of birth plus attestation version</b>, scrypt hashes, <code>__Host-</code> cookie sessions, CSRF origin check, HMAC rate limits</div><div><span class="tag ever">Evermore</span></div><div>Doorway · account (replaces Eden's 24 h JWT)</div>
+<div><b>Chosen Doorway</b>: build the career / run the home / in between; "who are you open to meeting" never inferred</div><div><span class="tag ever">Evermore</span></div><div>Doorway · role</div>
+<div><b>Non-negotiables one question at a time</b>: 4 live (children, income, timeline, exit) + ZIP; 11 marketed; faith opt-in in a separate sensitive store</div><div><span class="tag ever">Evermore</span></div><div>Doorway · foundations</div>
+<div><b>Three onboarding games</b>: Garden Builder (drag grid, 20 items), Story Choices (River, incl. the disagreement exchange), Quick Picks / Pattern Sorter (15 pairs)</div><div><span class="tag eden">Eden</span></div><div>Doorway · "how you move through the world"</div>
+<div><b>8-question Spark Quiz</b> (archived Flutter) as the accessible, no-drag fallback</div><div><span class="tag eden">Eden</span></div><div>Doorway · fallback path</div>
+<div><b>Garden DNA</b>: 8 traits, 3-part summary, optional share card</div><div><span class="tag eden">Eden</span></div><div>Doorway · end of games</div>
+<div><b>Seed choice</b>: Rose, Lavender, Sunflower, Ivy (+ Bonsai, Wildflower, Cactus, Cherry Blossom from Flutter)</div><div><span class="tag eden">Eden</span></div><div>Doorway · seed; shown as your icon in every garden</div>
+<div><b>Three profile prompts</b> (300 chars) and <b>dealbreakers</b> (distance, age, smoking, drinking, kids)</div><div><span class="tag eden">Eden</span></div><div>Doorway · profile</div>
+<div><b>Up to 3 private photos</b>, human review, EXIF strip, 5-minute links, held/approved/rejected states</div><div><span class="tag ever">Evermore</span></div><div>Doorway · photos (never shown before the mutual seal)</div>
+<div><b>The Proving</b>: self-declared capability ledger, provider and homemaker sides, verification tiers priced</div><div><span class="tag ever">Evermore</span></div><div>Doorway · Proving (post-beta verification)</div>
+<div><b>Vouching</b>: request by email, friends/community tiers, confirm/decline, what vouchers attest</div><div><span class="tag ever">Evermore</span></div><div>Doorway · behind a flag</div>
+<div><b>Three introductions a day</b>, fixed roster, never backfilled, Central-time day, idempotent</div><div><span class="tag ever">Evermore</span></div><div>Letters</div>
+<div><b>Hard filters</b>: role complement, non-negotiables both ways, same ZIP area, blocks and withheld members excluded, pool threshold ≥ 10 per side</div><div><span class="tag ever">Evermore</span></div><div>Letters · eligibility</div>
+<div><b>7-dimension compatibility</b> (+ optional Big Five), spark note, 0.48 prior when no quiz</div><div><span class="tag eden">Eden</span></div><div>Letters · ranking (never shown as a number)</div>
+<div><b>Qualitative tiers</b> ("Worth exploring", "Real potential") instead of percentages</div><div><span class="tag eden">Eden</span></div><div>Letters and Garden insights</div>
+<div><b>Reciprocal daily allocation</b> with exploration slots (dossier brief 06)</div><div><span class="tag ever">Evermore</span></div><div>Letters · allocation</div>
+<div><b>Honest pool states</b>: not ready in your area, counts under 5 hidden, no dates promised</div><div><span class="tag ever">Evermore</span></div><div>Letters · home</div>
+<div><b>Sealed yes/pass</b>, final, no one-sided reveal, one re-choice a day after an answer change</div><div><span class="tag ever">Evermore</span></div><div>Letters · the letter</div>
+<div><b>Capacity nudge</b> when liking with 3+ active connections</div><div><span class="tag eden">Eden</span></div><div>Letters · before a yes</div>
+<div><b>Daily discovery limit</b> (7 profiles)</div><div><span class="tag eden">Eden</span></div><div>Letters · superseded by three letters (stricter)</div>
+<div><b>Mutual seal</b>: two half-marks join, "a beginning, not a promise", match row race-safe</div><div><span class="tag ever">Evermore</span><span class="tag eden">Eden</span></div><div>Letters → Garden · seed planted with both seeds</div>
+<div><b>38 activities in three stages</b> + bridge questions, stage minimums 3/4/4, Gottman guard on conflict activities</div><div><span class="tag eden">Eden</span></div><div>Garden</div>
+<div><b>Both-answer-before-reveal</b> enforced in the API; reveal modes both_first, simultaneous, delayed</div><div><span class="tag eden">Eden</span></div><div>Garden (the same primitive as Letters and Together)</div>
+<div><b>Three reveal modalities</b>: score, drama, letter (typewriter postcard)</div><div><span class="tag eden">Eden</span></div><div>Garden · reveal</div>
+<div><b>Live synchronised reveal</b> (WebSocket, 3-2-1, co-presence), fallback "reveal anyway"</div><div><span class="tag eden">Eden</span></div><div>Garden · reveal</div>
+<div><b>Nudge</b> once per session; <b>surprise</b>, <b>humour</b> and <b>responsiveness</b> micro-prompts; "Reflect, then chat"</div><div><span class="tag eden">Eden</span></div><div>Garden · after reveal</div>
+<div><b>Stage 3 safeguards</b>: opt-in, security prime, family-of-origin framing, ghosting note, consent text</div><div><span class="tag eden">Eden</span></div><div>Garden · Depth</div>
+<div><b>Garden growth</b> 0/30/70/110, seed→sprout→bud→bloom, dual plant merging, dormant on unmatch</div><div><span class="tag eden">Eden</span></div><div>Garden, and it persists into Together</div>
+<div><b>Garden events</b>, <b>presence strings</b>, momentum cue (yellowing leaves), Memory Book timeline</div><div><span class="tag eden">Eden</span></div><div>Garden · memory book; later the Together memories</div>
+<div><b>Today's Question</b> (daily spark), no streak pressure, 365 rotated questions</div><div><span class="tag eden">Eden</span></div><div>Garden · journey; continues in Together as the daily prompt</div>
+<div><b>Connection Echo</b> every 3rd activity; <b>insights</b> across 8 dimensions</div><div><span class="tag eden">Eden</span></div><div>Garden · journey (qualitative only)</div>
+<div><b>Conversation Studio</b>: text messaging, polling, thoughtful prompts, report per thread, block ends thread</div><div><span class="tag ever">Evermore</span><span class="tag eden">Eden</span></div><div>Garden · chat (opens at the mutual seal)</div>
+<div><b>Photo Window</b>: graduated reveal at Sprout or Bud, both opt in; approved photos only (B10b)</div><div><span class="tag eden">Eden</span><span class="tag ever">Evermore</span></div><div>Garden · photo window</div>
+<div><b>Expedited meeting</b> ("Ready to meet?" at Sprout/Bud)</div><div><span class="tag eden">Eden</span></div><div>Garden → Bridge</div>
+<div><b>Stage 4 Connection</b> activities (designed): What I See In You, Our Story So Far, Friendly Debate, Dream Together, Video Date, Gratitude Ritual</div><div><span class="tag eden">Eden</span></div><div>Garden · Connection (M4)</div>
+<div><b>Bloom ceremony</b> and bridge opt-in</div><div><span class="tag eden">Eden</span></div><div>Bridge</div>
+<div><b>Intentions / Courtship road</b>: terms toggles, timeline 9–24 months, generated roadmap, jointly editable</div><div><span class="tag ever">Evermore</span></div><div>Bridge · optional, co-authored</div>
+<div><b>Date Designer</b>: 46 personality-scored templates, conversation starters, save and share</div><div><span class="tag eden">Eden</span></div><div>Bridge · proposes ideas into the deciding engine</div>
+<div><b>Double-blind deciding</b>: yes / maybe / pass, neither shown until both exist, a pass never shown as rejection</div><div><span class="tag tog">Together</span></div><div>Bridge (first date) and Together (every plan)</div>
+<div><b>Honest Expectations, Meeting Prep, Post-Date Check-in, First-Date Debrief</b> (designed)</div><div><span class="tag eden">Eden</span></div><div>Bridge</div>
+<div><b>"We met!" milestone</b></div><div><span class="tag eden">Eden</span></div><div>Bridge → opens the Together invitation</div>
+<div><b>Shared space by consent</b> (both turn it on), two-person model with names typed at setup</div><div><span class="tag tog">Together</span></div><div>Together · setup</div>
+<div><b>Today</b>: next agreed plan, waiting on an answer, daily prompt</div><div><span class="tag tog">Together</span></div><div>Together</div>
+<div><b>Dates</b>: weekly discovery of real things nearby (date, cost, link), filters for category, energy, cost, distance, duration, access needs; your own ideas</div><div><span class="tag tog">Together</span></div><div>Together · dates (Chapters feed it)</div>
+<div><b>Trips</b>: dreaming / planning / booked / done, shortlist, days, bookings, packing list</div><div><span class="tag tog">Together</span></div><div>Together · trips</div>
+<div><b>Upcoming</b>: agreed plans with an owner, edit or cancel, ICS export</div><div><span class="tag tog">Together</span></div><div>Together · upcoming</div>
+<div><b>Memories</b>: finished plans offer to become a memory; both export their own copy</div><div><span class="tag tog">Together</span><span class="tag eden">Eden</span></div><div>Together · memories (holds the garden's memory book)</div>
+<div><b>Notes for later</b>, sealed until a date; Eden's <b>Time Capsule</b> (30-day delayed reveal)</div><div><span class="tag tog">Together</span><span class="tag eden">Eden</span></div><div>Together · notes</div>
+<div><b>Demo mode</b> on-device with fictional seed items; <b>export everything</b>; <b>delete everything</b></div><div><span class="tag tog">Together</span></div><div>Together, and account-wide export and deletion</div>
+<div><b>Shared Chapters / co-authored intentions</b>, <b>Proving shared exercises</b> (post-beta)</div><div><span class="tag ever">Evermore</span></div><div>Together · later</div>
+<div><b>Couples Mode</b> (designed, never built)</div><div><span class="tag eden">Eden</span></div><div>Together is Couples Mode</div>
+<div><b>Chapters</b>: per-city calendar (long table, money workshop, supper club, out of town, standing invitation), local partners, open without a match</div><div><span class="tag ever">Evermore</span></div><div>Chapters</div>
+<div><b>Community integrity set</b>: extremist-content moderation, no ethnicity filters, published standard, romance-scam detection, financial-abuse resources</div><div><span class="tag ever">Evermore</span></div><div>Chapters and Safety</div>
+<div><b>Block and report</b> with merged category lists, P0/P1 SLAs, a report also blocks, "a person reads every report"</div><div><span class="tag ever">Evermore</span><span class="tag eden">Eden</span></div><div>Safety · everywhere</div>
+<div><b>Unmatch</b> sets the garden dormant; <b>withholding</b> of reported members from introductions</div><div><span class="tag eden">Eden</span><span class="tag ever">Evermore</span></div><div>Safety</div>
+<div><b>Intimate-image removal</b>: no account needed, 48 h clock, SHA-256 + dHash matching, blocklist, 36 h auto-hide</div><div><span class="tag ever">Evermore</span></div><div>Safety</div>
+<div><b>Contact requests</b> (12 h first reply), <b>safety queue</b> with audit trail and webhook alerts</div><div><span class="tag ever">Evermore</span></div><div>Safety · owners suite</div>
+<div><b>Texas ch. 106 "no background check" notice</b> (B18)</div><div><span class="tag ever">Evermore</span></div><div>Safety · legal</div>
+<div><b>Authenticity Signal</b>: invisible integrity layer (consistency drift, AI text, copy-paste farming, depth mismatch), never a score</div><div><span class="tag eden">Eden</span></div><div>Safety (M4)</div>
+<div><b>No read receipts, no last-active, no pay-to-see-likes, no FOMO timers</b></div><div><span class="tag eden">Eden</span><span class="tag tog">Together</span></div><div>Product rules</div>
+<div><b>No scores, no streaks, no guilt notifications, consent not matching, portable history</b></div><div><span class="tag tog">Together</span></div><div>Product rules</div>
+<div><b>Rate limits</b>: login, register, report, like; DB-backed</div><div><span class="tag eden">Eden</span><span class="tag ever">Evermore</span></div><div>API</div>
+<div><b>Aggregate metrics</b> endpoint: users, matches, activities, bloom rate, gardens by stage</div><div><span class="tag eden">Eden</span></div><div>Owners suite · metrics (counts under 5 hidden)</div>
+<div><b>Owners suite</b>: overview, offices, financials, sprint, metrics, Board, safety queue, decisions</div><div><span class="tag ever">Evermore</span></div><div>Owners suite (unchanged, extended)</div>
+<div><b>Waitlist</b> with side, city, consent, honeypot, export; <b>contact form</b></div><div><span class="tag ever">Evermore</span></div><div>Marketing site</div>
+<div><b>Marketing site</b>: two-halves hero, four steps, Proving, vouching, Chapters, who it's for, FAQ, why-now, press, privacy, credits</div><div><span class="tag ever">Evermore</span></div><div>Marketing site</div>
+<div><b>Working deciding demo in the hero</b>, five product spreads, any-stage section, "things this will never do", honest CTA</div><div><span class="tag tog">Together</span></div><div>Marketing site</div>
+<div><b>Journey, interactive reveal demo, science section, no-dark-patterns list</b> (landing)</div><div><span class="tag eden">Eden</span></div><div>Marketing site and the "Why this works" page</div>
+<div><b>Premium</b>: $12.99 / $79.99, 7-day trial, themes, activity packs, petals; <b>Evermore price cohorts</b> $14.99/$79 vs $24.99/$129 (D11); <b>paid weekly discovery</b></div><div><span class="tag eden">Eden</span><span class="tag ever">Evermore</span><span class="tag tog">Together</span></div><div>One subscription, decided by the owners (see Architecture)</div>
+<div><b>Garden themes</b> (Sunset, Ocean, Cherry Blossom), shareable garden and DNA cards</div><div><span class="tag eden">Eden</span></div><div>Garden · optional cosmetics</div>
+<div><b>Push: partner answered, dormant garden at 72 h, Day-N</b> (designed)</div><div><span class="tag eden">Eden</span></div><div>Notifications, all opt-in, none guilt-based</div>
+<div><b>Research dossier</b>, <b>concept playground</b>, <b>focus-group findings</b>, <b>expert panels</b></div><div><span class="tag ever">Evermore</span><span class="tag eden">Eden</span></div><div>Sources and the owners' evidence panel</div>
+<div><b>Design references</b>: nine Evermore screens, Eden design brief, Together's arch and palette</div><div><span class="tag ever">Evermore</span><span class="tag eden">Eden</span><span class="tag tog">Together</span></div><div>Design system</div>
+<div><b>iOS SwiftUI concept</b>, <b>Expo mobile app</b>, <b>vanilla-JS SPA</b>, <b>static prototype</b></div><div><span class="tag ever">Evermore</span><span class="tag eden">Eden</span><span class="tag tog">Together</span></div><div>One universal client (see Architecture)</div>
+<div><b>Local Express server</b> with JSON store and cross-device conflict resolver</div><div><span class="tag ever">Evermore</span></div><div>Retired; its only unique features (vouching, password and email change, reset) move to the API</div>
+<div><b>Build-time image pipeline</b>: fetch Pexels derivatives, draw icons, generate credits</div><div><span class="tag tog">Together</span></div><div>Marketing site build</div>
+</div>
+
+<h3 style="margin-top:56px">The seams: where the three products disagreed, and how it is resolved</h3>
+<div class="grid g2" style="margin-top:18px">
+<div class="card"><h4>Scores</h4><p>Eden shows tiers, insights and a premium "7-dimension deep-dive". Evermore forbids fake percentages. Together forbids any relationship score. <b>Resolution:</b> scores rank letters and pick activities; members only ever see qualitative tiers and a "where you line up" row on non-negotiables; nothing is graded once Together opens. The premium deep-dive becomes a one-time written reflection, "what you've learned about each other", with no number.</p></div>
+<div class="card"><h4>Cadence</h4><p>Eden: seven profiles a day, swipe gestures. Evermore: three letters, no swiping, "the reading is the product". <b>Resolution:</b> three sealed letters a day. The swipe is removed; the capacity nudge is kept.</p></div>
+<div class="card"><h4>Faces</h4><p>Eden hides photos until a graduated reveal at Sprout. Evermore blurs photos until a mutual yes. <b>Resolution:</b> no face before the mutual seal; after it, the Photo Window opens by double opt-in at Sprout or at the Bridge, whichever comes first. Approved photos only.</p></div>
+<div class="card"><h4>Streaks and timers</h4><p>Eden has a soft streak and 24 h session expiry; Together refuses streaks and guilt. <b>Resolution:</b> no streak counters anywhere. "Days together" is a neutral fact in the garden. Sessions never expire; they go quiet, and a dormant-garden note at 72 h is opt-in.</p></div>
+<div class="card"><h4>Roles</h4><p>Evermore requires a declared household role; Eden does not. <b>Resolution:</b> the Chosen Doorway has three doors. "In between" is a full member; role complement filters only when both people declared a side. Roles are jobs, never genders, and reversible until a match.</p></div>
+<div class="card"><h4>Who you can meet</h4><p>Eden's strict gender equality breaks for "everyone" and non-binary members. <b>Resolution:</b> Evermore's "who are you open to meeting: women / men / either", declared, never inferred, and symmetric.</p></div>
+<div class="card"><h4>Onboarding length</h4><p>Three games (under three minutes) versus eleven marketed non-negotiables plus a quiz. <b>Resolution:</b> the doorway is split across the first day: role and four non-negotiables before any letter; games before the first garden; the rest offered when it is useful. Mobile completion falls past about three minutes<span class="src sourced">sourced</span><sup class="ref"><a href="#s25">25</a></sup>.</p></div>
+<div class="card"><h4>Stacks</h4><p>FastAPI + Expo, Vercel functions + Neon + static HTML, vanilla SPA + Upstash. <b>Resolution:</b> one TypeScript monorepo on the Evermore API and database, with Eden's engine ported as a pure package and its 261 tests as the port's specification. Details and the alternative in Architecture; the decision is Ali's.</p></div>
+</div>
+</div></section>
+<section class="sec band" id="journey"><div class="wrap">
+<div class="eyebrow">03 · The journey</div>
+<h2>Six chapters, one arc. Each chapter ends by opening the next.</h2>
+<p class="lede">The arc is designed so that every hand-off is a feature that already exists in one of the three products. The mutual seal plants the garden. The bloom opens the bridge. The first date is decided with Together's engine. "We met" invites the shared space. Chapters feed the weekly ideas.</p>
+
+<div class="steps" style="margin-top:36px;background:var(--night-2);border-color:#3A382F">
+<div style="border-color:#3A382F"><div class="n">0</div><h4>Doorway</h4><p>Role, non-negotiables, three short games, your seed. Everything difficult happens first.</p></div>
+<div style="border-color:#3A382F"><div class="n">1</div><h4>Letters</h4><p>Up to three sealed introductions a day. A yes is private until it is mutual.</p></div>
+<div style="border-color:#3A382F"><div class="n">2</div><h4>The Garden</h4><p>Activities where neither answer shows until both exist. A plant grows from what you do.</p></div>
+<div style="border-color:#3A382F"><div class="n">3</div><h4>The Bridge</h4><p>Bloom, intentions, and a first date the two of you decide on without anyone going first.</p></div>
+<div style="border-color:#3A382F"><div class="n">4</div><h4>Together</h4><p>A shared space you both opt into: dates, trips, upcoming, memories, notes for later.</p></div>
+<div style="border-color:#3A382F"><div class="n">5</div><h4>Chapters</h4><p>Real gatherings in your city. Open to anyone, no match needed, verified hosts only.</p></div>
+</div>
+
+<figure style="margin-top:40px">
+<div class="screens">
+<figure><img src="screens/01-welcome.svg" width="390" height="844" alt="Welcome screen: A promise worth keeping, with an arch illustration and the button Find your other half"><figcaption>01 Welcome</figcaption></figure>
+<figure><img src="screens/02-choose-role.svg" width="390" height="844" alt="Choose your role: Provider or Homemaker cards, either role, any gender"><figcaption>02 Chosen Doorway</figcaption></figure>
+<figure><img src="screens/03-nonnegotiables.svg" width="390" height="844" alt="Non-negotiables: one question at a time about children"><figcaption>03 Foundations</figcaption></figure>
+<figure><img src="screens/04-home-not-ready.svg" width="390" height="844" alt="Home screen explaining introductions are not quite ready in your area, with no estimated date"><figcaption>04 Honest home</figcaption></figure>
+<figure><img src="screens/05-today-sealed-intro.svg" width="390" height="844" alt="Today's first letter from Elena, first name only, Pass and I'm interested buttons"><figcaption>05 A sealed letter</figcaption></figure>
+<figure><img src="screens/06-mutual-yes.svg" width="390" height="844" alt="Mutual yes: two halves join, a beginning not a promise"><figcaption>06 Mutual seal</figcaption></figure>
+<figure><img src="screens/07-conversation-future.svg" width="390" height="844" alt="Conversation screen with a thoughtful prompt and privacy-first note"><figcaption>07 Conversation</figcaption></figure>
+<figure><img src="screens/08-chapters-future.svg" width="390" height="844" alt="Chapters: the long table, no events scheduled yet"><figcaption>08 Chapters</figcaption></figure>
+<figure><img src="screens/09-proving-future.svg" width="390" height="844" alt="Known by more than a photograph: vouching and the Proving"><figcaption>09 Proving</figcaption></figure>
+</div>
+<figcaption>The nine Evermore screen references (390 × 844) already in the repository, from <code>docs/product/evermore-experience/screens</code>. They are authored mockups, not production screenshots, and all members shown are fictional. The Garden, Bridge and Together chapters below extend this language rather than replace it.</figcaption>
+</figure>
+
+<!-- Chapter 0 -->
+<div class="two" style="margin-top:64px">
+<div class="prose">
+<div class="eyebrow">Chapter 0 · Doorway</div>
+<h3>Everything difficult happens first.</h3>
+<p style="margin-top:12px">The doorway is the merged onboarding. It keeps Evermore's order (role before questions before any photograph) and Eden's rule that personality is measured indirectly, through play, because self-report fails on social desirability and limited self-knowledge<span class="src sourced">sourced</span><sup class="ref"><a href="#s26">26</a></sup>.</p>
+<p><b>Day one, before any letter:</b> account (invite code, date of birth, 18+ attestation), the Chosen Doorway (build the career / run the home / in between), who you are open to meeting, the four live non-negotiables one at a time (children, one income, timeline, who steps back) and a ZIP code. Then three profile prompts.</p>
+<p><b>Before the first garden:</b> the three games, Garden Builder, Story Choices and Pattern Sorter, under three minutes, with the 8-question Spark Quiz as a keyboard-only fallback; Garden DNA; seed choice.</p>
+<p><b>Offered when useful:</b> dealbreakers, the remaining marketed non-negotiables (the table, where you live, schooling, screens, money and debt, faith as a separate opt-in store), up to three private photos, the Proving ledger, vouching requests.</p>
+<p><b>Rules carried over:</b> roles are chosen, never assigned, and reversible until the first match. Same-side members are never shown to each other when both declared a side. "In between" members are matched on non-negotiables alone. Every answer is private: no other member can read it; introductions see only the first name and side until the seal.</p>
+</div>
+<div>
+<figure><div class="photo"><img src="img/trad-hero-apartment.jpg" width="1200" height="800" alt="Looking through a dark doorway into a warm sunlit apartment"></div><figcaption>The doorway. Evermore's own hero photograph, kept as the visual anchor for chapter 0.</figcaption></figure>
+<div class="card" style="margin-top:18px"><h4>What the games measure</h4><p>Garden Builder (4 questions, drag grid in the full version): love language, attachment instinct, connection style, relationship approach. Story Choices (River at the exhibit): introspection, curiosity, analytic vs empathetic, social vs intimate, vulnerability, plus the disagreement exchange the scorer needs. Pattern Sorter (15 pairs): extraversion, structure, expression, optimism, depth. Output: Big Five, attachment anxiety and avoidance, communication directness and emotionality, conflict style, love language, recharge, weekend, humour.</p></div>
+</div>
+</div>
+
+<!-- Chapter 1 -->
+<div class="two" style="margin-top:64px">
+<div>
+<figure><div class="photo tall arch"><img src="img/pexels-5425602.jpg" width="800" height="1000" alt="A hand writing with a fountain pen on textured paper"></div><figcaption>A letter, not a card. First name and side only, answers before any face.</figcaption></figure>
+</div>
+<div class="prose">
+<div class="eyebrow">Chapter 1 · Letters</div>
+<h3>Up to three people a day. No swiping.</h3>
+<p style="margin-top:12px">Each morning the home screen opens like an envelope: today's letters, at most three, chosen for you rather than ranked by you. Choice overload is real; people are more satisfied with a selection from six than from twenty-four<span class="src sourced">sourced</span><sup class="ref"><a href="#s16">16</a></sup>. Three is the reading-is-the-product number from Evermore and the daily-cap recommendation from Eden's fatigue panel.</p>
+<p><b>How a letter is chosen.</b> Hard filters first, both ways: role complement, non-negotiables compatible under the modelled rules (children within one step, income plan within one step, timeline within one step, not both stepping out), same ZIP area, dealbreaker age and distance, nobody blocked, reported or withheld. Then Eden's compatibility ranking over the pool (values, communication, lifestyle, interests, humour, attachment, love language, Big Five), used only to order. Then reciprocal daily allocation with a per-member cap of three and 20% exploration slots so that nobody is invisible, the failure that drives men off incumbent apps<span class="src uncited">uncited</span>.</p>
+<p><b>What a letter shows.</b> First name, chosen side, the "where you line up" row (✓ match / ≈ soft / ✕ miss on the non-negotiables you both answered), one qualitative line from the spark note ("You both believe in talking things through"), and the prompts they chose to show. No face, no age beyond the band, no percentage.</p>
+<p><b>Yes or pass.</b> Both are final and both are private. Nobody is ever told that someone said yes unless they said yes too; a pass simply stops the letter appearing. With three or more active gardens, a yes first asks whether you have the time for another one. A mutual yes is the <b>mutual seal</b>: the two half-marks join, the copy says "a beginning, not a promise", and a garden is planted with both seeds.</p>
+<p><b>Honest states.</b> "Not quite ready in your area" with no date; counts shown only at five or more; "no more letters today"; invitation codes offered as the way to help.</p>
+</div>
+</div>
+
+<!-- Chapter 2 -->
+<div style="margin-top:64px">
+<div class="eyebrow">Chapter 2 · The Garden</div>
+<h3>Neither of you sees an answer until both have written one.</h3>
+<p class="lede">The garden is Eden, whole. Thirty-eight activities in three stages, a fourth stage designed, and a plant that grows from what the two of you actually do. This is where closeness is built, and the mechanics are the ones with evidence behind them.</p>
+<div class="grid g3" style="margin-top:28px">
+<div class="card"><h4>Discovery · 9 activities · 3 to pass</h4><p>Quick Fire, Perfect Day, Three Things, Hot Takes, Never Have I Ever, Rapid Fire Match, Personality Bingo, Sync Challenge, Speed Categories. Light, fast, many short interactions, because familiarity grows attraction in live interaction<span class="src sourced">sourced</span><sup class="ref"><a href="#s20">20</a></sup>.</p></div>
+<div class="card"><h4>Play · 20 activities · 4 to pass</h4><p>Style Swap, Would You Rather: Values, Story Builder, Caption This, Guess Your Match, Playlist Roulette, Team Trivia, The Rewind, Good News!, Two Truths &amp; a Lie, Hot Takes Arena, Prediction Game, Dream Date Architect, Soundtrack of Us, Mixtape Exchange, Trivia About Me, Story Chain, Draw Together. Cooperative play bonds; shared humour predicts satisfaction<span class="src sourced">sourced</span><sup class="ref"><a href="#s19">19</a></sup>. Conflict activities unlock only after three positive ones (the Gottman guard).</p></div>
+<div class="card"><h4>Depth · 11 activities · 4 to pass</h4><p>Deep Roots (the 36 questions in three levels), The Real Me, If You Really Knew Me, Values Compass, Dream Map, Photo Window, Listen Together, Memory Lane, The Wish List, Secret Ballot, The Time Capsule. Opt-in, with a security prime first and extra framing around family history. Vulnerable disclosure is the potent kind, and the riskiest, so it is scaffolded.</p></div>
+</div>
+<div class="two" style="margin-top:28px">
+<div class="prose">
+<p><b>The reveal.</b> The API returns <code>partner_response: null</code> until both responses exist; the client cannot leak what it never received. Three modalities fit the activity: a score ("7/10 matched"), a drama ("You said… and they said…"), or a letter, typed word by word onto a postcard. When both are present the reveal is live: a 3-2-1 countdown over a WebSocket, and a "reveal anyway" fallback. Afterwards, three small questions in sequence: did they surprise you, did it make you laugh, did they get you. Those answers feed the garden's insight and the Authenticity Signal, never a score shown to the other person.</p>
+<p><b>Growth.</b> Every completed activity earns 10 or 15 points. Seed at 0, sprout at 30, bud at 70, bloom at 110. The two plants, each in the colour of its owner's seed, grow toward a divider that fades as the points climb. Leaves yellow after three quiet days; nothing breaks, nothing nags. Stage transitions write a garden event with a sentence of its own ("Something is forming. Three activities in."). Every activity and milestone goes into the Memory Book.</p>
+<p><b>Around the activities.</b> Today's Question, the same one for every pair that day, with no streak. A Connection Echo after every third activity. A conversation that opens at the seal, text only, with thoughtful prompts, a report button on every thread and a block that ends it. The Photo Window at sprout: both must opt in before either sees a face. "Ready to meet?" at sprout or bud for pairs who just know; the bloom remains the ceremony.</p>
+</div>
+<div>
+<figure><div class="grid g4" style="gap:10px"><img src="img/eden-stage1-seed.jpg" width="700" height="700" alt="Watercolour of a seed in soil"><img src="img/eden-stage2-sprout.jpg" width="700" height="700" alt="Watercolour of a sprout"><img src="img/eden-stage3-bud.jpg" width="700" height="700" alt="Watercolour of a bud"><img src="img/eden-stage4-bloom.jpg" width="700" height="700" alt="Watercolour of a pink flower in full bloom"></div><figcaption>Seed, sprout, bud, bloom. The four garden stages as already illustrated in the Eden repository; they fit the paper-and-ink palette without a change.</figcaption></figure>
+<figure style="margin-top:14px"><img src="img/eden-seeds-all-four-types.jpg" width="700" height="700" alt="Four seeds: rose, lavender, sunflower and ivy" style="border-radius:4px"><figcaption>Rose, Lavender, Sunflower, Ivy: your seed is your icon in every garden, and the colour of your plant.</figcaption></figure>
+</div>
+</div>
+</div>
+</div></section>
+<section class="sec" id="bridge"><div class="wrap">
+<!-- Chapter 3 -->
+<div class="two">
+<div class="prose">
+<div class="eyebrow">Chapter 3 · The Bridge</div>
+<h3>From a garden to a table. The first date is decided without anyone going first.</h3>
+<p style="margin-top:12px">This is the chapter none of the three products finished, and it is the seam that makes the whole arc one product. Eden designed the Bridge (date designer, honest expectations, meeting prep, post-date check-in) and built the first piece, 46 personality-scored first-date templates. Evermore built the Intentions road. Together built the deciding engine. Put together:</p>
+<p><b>1 · Bloom, or "ready to meet".</b> At bloom the garden asks "Let's do this / Not yet". At sprout or bud a quieter card asks the same for pairs who just know. Either way, three bridge questions first: what are you looking forward to, what should they know before you meet, your ideal first five minutes.</p>
+<p><b>2 · Intentions, co-authored and optional.</b> Evermore's terms (families meet early, public first meetings, boundaries stated, exclusive from day one, a mentor couple, counselling) and the timeline become a jointly editable road. Each person proposes; nothing is on the road until both agree. It is never a countdown and never required.</p>
+<p><b>3 · The first date, decided double-blind.</b> The Date Designer proposes five ideas scored on both personalities (a quiet walk and coffee for a low-pressure meet, a pottery class for two makers), each with a conversation starter. The pair answers yes, maybe or pass on each, privately. A mutual yes becomes the plan: a public place, a time, who books it. A pass never surfaces as a rejection.</p>
+<p><b>4 · Meeting prep and after.</b> Honest expectations (one thing each), a public-place reminder and a safety check-in option, then the "We met!" milestone saved to the garden, a short First-Date Debrief for each person privately, and a post-date check-in a day later. "We met" is also the moment the app offers the shared space.</p>
+</div>
+<div>
+<figure><div class="photo"><img src="img/pexels-32738698.jpg" width="1200" height="800" alt="A restaurant table set for two by a window"></div><figcaption>The first table. Public, agreed by both, booked by one named person.</figcaption></figure>
+<figure class="diagram" style="margin-top:18px"><svg viewBox="0 0 640 230" role="img" aria-label="Bridge flow: bloom or ready-to-meet, bridge questions, intentions, date designer, double-blind decision, plan, we met, invitation to Together">
+<g font-family="Instrument Sans,system-ui,sans-serif" font-size="12" fill="#1D1B18">
+<rect x="10" y="20" width="120" height="44" rx="3" fill="#DDE9DF"/><text x="70" y="38" text-anchor="middle" font-weight="600">Bloom</text><text x="70" y="54" text-anchor="middle" fill="#4A453D">or "ready to meet"</text>
+<rect x="160" y="20" width="120" height="44" rx="3" fill="#F4EFE6" stroke="#CBBFAB"/><text x="220" y="38" text-anchor="middle" font-weight="600">3 bridge questions</text><text x="220" y="54" text-anchor="middle" fill="#4A453D">sealed, then revealed</text>
+<rect x="310" y="20" width="120" height="44" rx="3" fill="#F4EFE6" stroke="#CBBFAB"/><text x="370" y="38" text-anchor="middle" font-weight="600">Intentions road</text><text x="370" y="54" text-anchor="middle" fill="#4A453D">optional, co-authored</text>
+<rect x="460" y="20" width="170" height="44" rx="3" fill="#F4EFE6" stroke="#CBBFAB"/><text x="545" y="38" text-anchor="middle" font-weight="600">Date Designer</text><text x="545" y="54" text-anchor="middle" fill="#4A453D">5 ideas scored for both</text>
+<path d="M130 42H160M280 42H310M430 42H460" stroke="#6B675C" stroke-width="1.5" marker-end="url(#ar)"/>
+<path d="M545 64V90" stroke="#6B675C" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="400" y="92" width="230" height="52" rx="3" fill="#EE9A7C"/><text x="515" y="114" text-anchor="middle" font-weight="600" fill="#2A1F14">Yes / maybe / pass, double-blind</text><text x="515" y="132" text-anchor="middle" fill="#2A1F14">Together's engine · mutual yes becomes a plan</text>
+<path d="M400 118H330" stroke="#6B675C" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="190" y="92" width="140" height="52" rx="3" fill="#F4EFE6" stroke="#CBBFAB"/><text x="260" y="114" text-anchor="middle" font-weight="600">The plan</text><text x="260" y="132" text-anchor="middle" fill="#4A453D">public place · time · owner</text>
+<path d="M190 118H130" stroke="#6B675C" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="10" y="92" width="120" height="52" rx="3" fill="#DDE9DF"/><text x="70" y="114" text-anchor="middle" font-weight="600">We met</text><text x="70" y="132" text-anchor="middle" fill="#4A453D">garden milestone</text>
+<path d="M70 144V170" stroke="#6B675C" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="10" y="172" width="300" height="44" rx="3" fill="#26322A"/><text x="160" y="190" text-anchor="middle" font-weight="600" fill="#F4EFE6">Debrief (private) · check-in next day</text><text x="160" y="206" text-anchor="middle" fill="#D9D1C0">then: "Open a shared space together?"</text>
+</g></svg><figcaption>The Bridge, end to end. Every box is an existing feature from one of the three products; only the arrows are new.</figcaption></figure>
+</div>
+</div>
+</div></section>
+
+<section class="sec forest" id="together"><div class="wrap">
+<!-- Chapter 4 -->
+<div class="eyebrow">Chapter 4 · Together</div>
+<h2>Useful at six weeks and at sixteen years.</h2>
+<p class="lede">Together is the alynol product, kept whole: six tabs, double-blind deciding on everything, a shared calendar, a collection of memories, notes sealed until a date. It opens only when both people turn it on; nothing opens because you matched. The garden comes with you and keeps growing from the things you do.</p>
+<div class="grid g3" style="margin-top:32px">
+<div class="card"><h4>Today</h4><p>The next agreed plan at the top ("In 3 days"), what is waiting on one of you, and the day's prompt ("What would make this week feel less like admin? Answer it separately, then compare.").</p></div>
+<div class="card"><h4>Dates</h4><p>A weekly handful of real things nearby with a date, a cost and a link that books it, plus your own ideas. Filters that matter: category, energy (low / some / high), cost band, distance, duration, access needs (step-free, seated, quiet, parking). Each answered yes / maybe / pass, sealed. Chapter events arrive here too.</p></div>
+<div class="card"><h4>Trips</h4><p>Dreaming, planning, booked, done. A shortlist that sits until one place sticks, then days, bookings and a packing list you both edit. A shared list beats fourteen screenshots in a chat thread.</p></div>
+<div class="card"><h4>Upcoming</h4><p>One short list of what is agreed, a name against each item so it is clear who books the table, edit or cancel by either, export as a normal calendar file. No lock-in.</p></div>
+<div class="card"><h4>Memories</h4><p>Finished plans offer to become a memory: a line and a date. The Garden's memory book (every activity, both answers, every milestone) lives here as the first chapter of the collection. People underestimate how much they will enjoy rediscovering ordinary days<span class="src sourced">sourced</span><sup class="ref"><a href="#s5">5</a></sup>, and sharing good news with a responsive partner raises wellbeing beyond the event itself<span class="src sourced">sourced</span><sup class="ref"><a href="#s9">9</a></sup>.</p></div>
+<div class="card"><h4>Notes for later</h4><p>Write something now, set the date it opens; sealed from both of you until then. Eden's Time Capsule (a message to "future us", opened after 30 days) becomes the first note in every shared space. No notification pressure. It is simply there when the day comes.</p></div>
+</div>
+<div class="two" style="margin-top:36px">
+<figure><div class="photo"><img src="img/pexels-95425.jpg" width="1200" height="800" alt="Hands exchanging fruit over a market stall"></div><figcaption>"Saturday market, then the long way home." A sample idea from Together's demo week.</figcaption></figure>
+<div class="prose">
+<p><b>The garden in Together.</b> The plant is still there, in its own view, with the whole history underneath it. It keeps growing from memories and from the Connection-stage activities that fit established couples (What I See In You, Our Story So Far, Dream Together, the Gratitude Ritual), each with the same sealed reveal. It is a record, not a score: no stage above bloom, no health rating, no grade.</p>
+<p><b>Later, by the owners' choice:</b> Shared Chapters (a co-authored correspondence about future life, explicitly post-beta), the Proving as opt-in shared household exercises with two independent participants and no judgment score, and a small paid tier for the weekly discovery, which is the part with a real cost behind it.</p>
+<p><b>Leaving.</b> Each person can export their own copy of everything at any time, in a format readable without Evermore, and close the shared space. Nobody's history is held hostage.</p>
+</div>
+</div>
+
+<!-- Chapter 5 -->
+<div class="two" style="margin-top:64px">
+<div class="prose">
+<div class="eyebrow">Chapter 5 · Chapters</div>
+<h3>The app is the smallest part of it.</h3>
+<p style="margin-top:12px">Evermore's Chapters are a per-city standing calendar that anyone can join without a match: the long table on the first Sunday (twenty people, assigned seats), the money workshop on the second Saturday, a monthly supper club in members' homes, a seasonal trip out of town, and a weekly open evening. Local partners (farm stands, co-ops, run clubs, trade schools, congregations) host and vouch.</p>
+<p><b>In the unified app</b> Chapters do two more things. Their events flow into Together's weekly Dates ideas for couples in the city, so a pair's shared life and the community are the same calendar. And the gatherings are where vouching happens in person. Verified events and actual hosts only; no fictional RSVPs, and "no events scheduled here yet" is a valid, honest state.</p>
+<p><b>Community integrity</b>, all shipped before Chapters opens: extremist-content moderation, no ethnicity filters, a published community standard, romance-scam detection and financial-abuse resources. Romance-scam losses reached $1.16B in the first nine months of 2025<span class="src sourced">sourced</span><sup class="ref"><a href="#s27">27</a></sup>.</p>
+</div>
+<figure><div class="photo"><img src="img/trad-long-table-brunch.jpg" width="1200" height="800" alt="Friends reaching across a round table crowded with brunch plates, seen from above"></div><figcaption>The long table. First Sunday of the month, assigned seats.</figcaption></figure>
+</div>
+</div></section>
+
+<section class="sec" id="demo"><div class="wrap">
+<div class="eyebrow">04 · Demo</div>
+<h2>Try the one mechanic at its three distances.</h2>
+<p class="lede">Three small working demos on this page, and a full walkthrough of the whole arc as a separate page. Everything runs in your browser; nothing is sent anywhere. "Theo" is a fictional partner whose answers are scripted.</p>
+<p style="margin-top:18px"><a class="btn peach" href="demo.html">Open the full walkthrough demo →</a> <span class="small muted" style="margin-left:10px">Doorway → Letters → Garden → Bridge → Together, two names, on this device only.</span></p>
+
+<div class="grid g3" style="margin-top:36px">
+<div class="demo" id="d-letter">
+<div class="dh"><b>A sealed letter</b><span>Chapter 1</span></div>
+<p class="small muted">Theo has already answered. You cannot see what he said until you have answered too, and you never will unless you both said yes.</p>
+<div class="card" style="margin:14px 0;padding:16px"><p class="small" style="color:var(--clay);letter-spacing:.1em;text-transform:uppercase;font-weight:600;font-size:11px">Today's first letter</p><p style="font-family:var(--f-display);font-size:26px;margin-top:4px">Theo</p><p class="small muted">Builds the career · Dallas–Fort Worth</p><p class="small" style="margin-top:8px">Where you line up: children ✓ · one income ✓ · timeline ≈</p><p class="small" style="margin-top:4px;font-style:italic">"You both believe in talking things through."</p></div>
+<div class="vote" role="group" aria-label="Your answer"><button type="button" data-v="pass">Pass</button><button type="button" data-v="yes">I'm interested</button></div>
+<div class="result" aria-live="polite"><span class="sealed">Theo's answer is sealed</span></div>
+</div>
+
+<div class="demo" id="d-garden">
+<div class="dh"><b>Both answer, then reveal</b><span>Chapter 2</span></div>
+<p class="small muted">Perfect Day, from Discovery. Theo has written his. Write yours; the reveal is simultaneous and the garden grows.</p>
+<label class="small" for="d-garden-in" style="display:block;margin:14px 0 6px;font-weight:600">Describe your perfect day, morning to night.</label>
+<textarea id="d-garden-in" rows="3" maxlength="200" style="width:100%;border:1px solid var(--rule);border-radius:4px;padding:10px;font:15px var(--f-text);background:var(--paper);color:var(--ink)" placeholder="No rules, no budget, no limits."></textarea>
+<div style="display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap"><button class="btn" type="button" id="d-garden-go">Submit</button><span class="sealed">Theo's answer is sealed</span></div>
+<div class="result" id="d-garden-out" hidden></div>
+<div style="margin-top:12px"><div class="small muted" style="display:flex;justify-content:space-between"><span id="d-garden-stage">Seed · 20 pts</span><span>30 to sprout</span></div><div class="meter" style="margin-top:6px"><i id="d-garden-bar" style="width:18%"></i></div></div>
+</div>
+
+<div class="demo" id="d-decide">
+<div class="dh"><b>Deciding this week</b><span>Chapters 3 &amp; 4</span></div>
+<p class="small muted">Three ideas near you. Theo has voted. Answer all three; agreement surfaces, a pass never does.</p>
+<div id="d-decide-list" style="display:grid;gap:10px;margin-top:14px"></div>
+<div class="result" id="d-decide-out" aria-live="polite"><span class="sealed">Theo's votes are sealed</span></div>
+<button class="btn ghost" type="button" id="d-decide-reset" style="margin-top:10px">Start over</button>
+</div>
+</div>
+</div></section>
+<section class="sec" id="science"><div class="wrap">
+<div class="eyebrow">05 · The science</div>
+<h2>Every mechanic has a reason. Most of them have a study.</h2>
+<p class="lede">The three research programmes behind the products (Evermore's dossier, Eden's connection-psychology report and expert panels, Together's product rules) agree more than they knew. Below, each mechanic in the unified app is paired with the evidence it rests on, and with what the evidence does not support. Numbers link to the sources list.</p>
+
+<div class="grid g2" style="margin-top:36px">
+<div class="card"><div class="eyebrow" style="margin-bottom:8px">The sealed answer</div><h4>Reciprocal disclosure, in turns, builds liking</h4><p>Forty-five minutes of escalating, reciprocal self-disclosure produced closeness in strangers near that of long relationships; the structure, not attitude matching, was the active ingredient<sup class="ref"><a href="#s1">1</a></sup>. Taking turns matters: alternating disclosure produced more liking than one person disclosing in full first<sup class="ref"><a href="#s3">3</a></sup>. Disclosure and liking correlate across 94 studies<sup class="ref"><a href="#s31">31</a></sup>, but intimacy only grows when disclosure meets a responsive partner<sup class="ref"><a href="#s4">4</a>,<a href="#s32">32</a></sup>. Hence: both answer, then both see, then "did they get you?".</p></div>
+<div class="card"><div class="eyebrow" style="margin-bottom:8px">Three letters, no swiping</div><h4>Fewer options, better choices, less fatigue</h4><p>People offered six options bought and were more satisfied than those offered twenty-four<sup class="ref"><a href="#s16">16</a></sup>. 78% of app users report burnout<sup class="ref"><a href="#s14">14</a></sup>; 54% of women say they were overwhelmed by the volume of messages<sup class="ref"><a href="#s13">13</a></sup>. Online meeting overtook friends as the main way US couples meet around 2013<sup class="ref"><a href="#s17">17</a></sup>, so the channel is not the problem; the deck is.</p></div>
+<div class="card"><div class="eyebrow" style="margin-bottom:8px">Ranking, never a percentage</div><h4>Scores are for ordering, not for judging</h4><p>A review of the industry found no published evidence that matching algorithms predict relationship success<sup class="ref"><a href="#s11">11</a></sup>; machine learning over 100+ traits could not forecast which particular pair would want each other<sup class="ref"><a href="#s12">12</a></sup>; across 43 longitudinal studies, partner-specific compatibility explained almost none of the variance in relationship quality<sup class="ref"><a href="#s22">22</a></sup>. Actual similarity predicts attraction before people meet but fades in existing relationships; perceived similarity persists<sup class="ref"><a href="#s18">18</a></sup>. Uncertainty itself increases attraction<sup class="ref"><a href="#s24">24</a></sup>. So Eden's seven dimensions order the letters and pick activities, and members see tiers and a sentence, never a number.</p></div>
+<div class="card"><div class="eyebrow" style="margin-bottom:8px">Measured by play</div><h4>Games beat questionnaires for honesty and completion</h4><p>People know their own thoughts better than they know their own behaviour; others often judge our traits better than we do<sup class="ref"><a href="#s26">26</a></sup>. Game-based assessment infers traits from play rather than from self-report<sup class="ref"><a href="#s30">30</a></sup>; the Eden research review ranks it as harder to fake and better liked than questionnaires. Mobile survey completion drops past about three minutes<sup class="ref"><a href="#s25">25</a></sup>. The doorway games are under three minutes and measure indirectly; the long marketed questionnaire is spread across the first week.</p></div>
+<div class="card"><div class="eyebrow" style="margin-bottom:8px">Attachment, weighted highest</div><h4>Security is the strongest single predictor</h4><p>Romantic love works as an attachment process<sup class="ref"><a href="#s10">10</a></sup>, and attachment security is the most robust predictor of relationship outcomes in the adult literature<sup class="ref"><a href="#s21">21</a></sup>; a secure partner lifts an insecure one, which is why the scorer gives a secure-insecure pair 0.6 and an anxious-avoidant pair 0.15. Security priming, a moment spent thinking of someone who has always been in your corner, shifts behaviour toward secure functioning, which is why Depth begins with it.</p></div>
+<div class="card"><div class="eyebrow" style="margin-bottom:8px">Conflict style, and the guard</div><h4>How you fight predicts how long you last</h4><p>Couples who stayed together kept positive to negative interactions near five to one during conflict; stonewalling predicted dissolution<sup class="ref"><a href="#s23">23</a></sup>. Playful bids and enthusiastic responses in ordinary moments predicted humour and affection during later conflict<sup class="ref"><a href="#s8">8</a></sup>. So avoid-plus-avoid scores 0.3, conflict activities unlock only after three positive ones, and Today's Question is a daily bid with no streak attached.</p></div>
+<div class="card"><div class="eyebrow" style="margin-bottom:8px">Humour, surprise, play</div><h4>Shared laughter is a bonding agent</h4><p>Across 39 studies, positive and shared humour predicted relationship satisfaction while aggressive humour predicted the opposite<sup class="ref"><a href="#s19">19</a></sup>. Shared participation in novel and arousing activities raised relationship quality over a mundane task in three experiments, and self-reported boredom mediated the decline after the honeymoon<sup class="ref"><a href="#s2">2</a></sup>. Many short interactions build familiarity and liking<sup class="ref"><a href="#s20">20</a></sup>. Hence Caption This, the surprise prompt, and nine light activities before a deep one.</p></div>
+<div class="card"><div class="eyebrow" style="margin-bottom:8px">Dates, planned on purpose</div><h4>Shared activities maintain relationships; exciting ones expand them</h4><p>Shared relationship activities function as maintenance, raising satisfaction and commitment<sup class="ref"><a href="#s6">6</a></sup>. People who plan more exciting dates experience more self-expansion and, through it, more closeness<sup class="ref"><a href="#s7">7</a></sup>. Together's weekly discovery exists to put an exciting, bookable option in front of a tired couple; the filters exist so "exciting" fits the energy they actually have.</p></div>
+<div class="card"><div class="eyebrow" style="margin-bottom:8px">Memories and sealed notes</div><h4>Ordinary days are worth more later than they feel now</h4><p>In four longitudinal studies people underestimated how curious and pleased they would be to rediscover a documented ordinary day months later<sup class="ref"><a href="#s5">5</a></sup>. Telling a partner about good news, and being met with active, constructive interest, raised daily wellbeing beyond the event itself<sup class="ref"><a href="#s9">9</a></sup>. Memories, the Good News! activity and notes for later are those two findings as features.</p></div>
+<div class="card"><div class="eyebrow" style="margin-bottom:8px">What the evidence does not support</div><h4>So the product does not claim it</h4><p>Love languages lack strong empirical support for their three central assumptions<sup class="ref"><a href="#s15">15</a></sup>, so that dimension carries 3% and is framed as "how you like to be shown". Compatibility percentages are not shown. Verification tiers are self-declared until a vendor confirms them, and the Proving says so. Nothing in the app is end-to-end encrypted, and the privacy page will not say it is. Testimonials and waitlist counts are never invented.</p></div>
+</div>
+
+<figure class="demo" style="margin-top:36px">
+<div class="dh"><b>Compatibility weights used for ranking</b><span>Eden · matching.py · with Big Five</span></div>
+<div class="bars">
+<div><span>Communication</span><div class="b"><i style="width:91%"></i></div><span class="v">20%</span></div>
+<div><span>Attachment</span><div class="b"><i style="width:91%"></i></div><span class="v">20%</span></div>
+<div><span>Values overlap</span><div class="b"><i style="width:82%"></i></div><span class="v">18%</span></div>
+<div><span>Big Five similarity</span><div class="b"><i style="width:45%"></i></div><span class="v">10%</span></div>
+<div><span>Lifestyle</span><div class="b"><i style="width:23%"></i></div><span class="v">5%</span></div>
+<div><span>Humour</span><div class="b"><i style="width:18%"></i></div><span class="v">4%</span></div>
+<div><span>Interests</span><div class="b"><i style="width:14%"></i></div><span class="v">3%</span></div>
+<div><span>Love language</span><div class="b"><i style="width:14%"></i></div><span class="v">3%</span></div>
+</div>
+<figcaption>Weights from the code, which differ from the older figures in the Eden docs (25/25/15/10/5/10/10). Bars are drawn to one scale. Interests and lifestyle are deliberately light: Big Five similarity explains about half a percent of satisfaction and interests carry near-zero signal in Eden's cited literature. These weights order letters; they are never displayed. <span class="src modelled">modelled</span></figcaption>
+</figure>
+</div></section>
+
+<section class="sec" id="design"><div class="wrap">
+<div class="eyebrow">06 · Design language</div>
+<h2>Two halves, one doorway, a letter worth opening.</h2>
+<p class="lede">The three products arrived, independently, at warm paper, dark ink, a terracotta accent and a green. Two of them chose an arch; two chose a two-sided mark. The unified language takes what they share and gives Eden's garden a place in it.</p>
+
+<div class="two" style="margin-top:36px">
+<div>
+<h3>Palette</h3>
+<div class="grid g4" style="margin-top:14px;gap:10px">
+<div style="background:#F4EFE6;border:1px solid #CBBFAB;border-radius:4px;padding:12px;color:#1D1B18;min-height:84px"><b class="mono small">#F4EFE6</b><br><span class="small">Paper</span></div>
+<div style="background:#1D1B18;border-radius:4px;padding:12px;color:#F4EFE6;min-height:84px"><b class="mono small">#1D1B18</b><br><span class="small">Ink</span></div>
+<div style="background:#26322A;border-radius:4px;padding:12px;color:#F4EFE6;min-height:84px"><b class="mono small">#26322A</b><br><span class="small">Forest · the career half</span></div>
+<div style="background:#E9C9A4;border-radius:4px;padding:12px;color:#2A1F14;min-height:84px"><b class="mono small">#E9C9A4</b><br><span class="small">Apricot · the home half</span></div>
+<div style="background:#EE9A7C;border-radius:4px;padding:12px;color:#2A1F14;min-height:84px"><b class="mono small">#EE9A7C</b><br><span class="small">Seal</span></div>
+<div style="background:#B8543A;border-radius:4px;padding:12px;color:#FFF6EE;min-height:84px"><b class="mono small">#B8543A</b><br><span class="small">Clay · links, accents</span></div>
+<div style="background:#46574A;border-radius:4px;padding:12px;color:#F4EFE6;min-height:84px"><b class="mono small">#46574A</b><br><span class="small">Moss · the garden</span></div>
+<div style="background:#171613;border-radius:4px;padding:12px;color:#EFE7DA;min-height:84px"><b class="mono small">#171613</b><br><span class="small">Night · dark bands, dark mode</span></div>
+</div>
+<p class="small muted" style="margin-top:12px">Evermore's site tokens (paper, ink, forest, apricot, brick, night) plus Together's clay and moss. Eden's emerald and teal (#10B981, #14B8A6) are retired; the garden is drawn in moss and the seed colours (rose, lavender, sunflower, ivy) so each pair's plant is its own. Sourced / modelled / uncited tag colours stay as they are. Full dark mode on every surface.</p>
+<h3 style="margin-top:28px">Type</h3>
+<p style="margin-top:10px"><span style="font-family:var(--f-display);font-size:30px;font-variation-settings:'opsz' 144,'SOFT' 40,'WONK' 1">Fraunces</span> for display, with the optical-size and WONK axes live for warmth at large sizes and restraint at small ones. <span style="font-weight:600">Instrument Sans</span> for text and interface. JetBrains Mono for figures and keys. Both families come from Together; the alternative pair (Instrument Serif and Hanken Grotesk, from the Evermore site and the owners suite) stays available and the owners suite keeps it. This is Dominick's call under D70, and the issue for it is written both ways. Numbers are tabular everywhere they line up.</p>
+</div>
+<div>
+<h3>The mark and the grammar</h3>
+<div class="two" style="margin-top:14px;gap:14px">
+<div class="card" style="text-align:center"><svg viewBox="0 0 32 32" width="88" height="88" aria-hidden="true" style="margin:0 auto"><path d="M4 30V16a12 12 0 0 1 12-12v26z" fill="#26322A"/><path d="M28 30V16A12 12 0 0 0 16 4v26z" fill="#EE9A7C"/><rect x="15.4" y="4" width="1.2" height="26" fill="#F4EFE6"/></svg><p class="small" style="margin-top:8px"><b>The arch, split.</b> Together's doorway and Evermore's two halves are one shape: two legs, one opening, a seam down the middle. Forest and apricot are the two chosen sides.</p></div>
+<div class="card" style="text-align:center"><svg viewBox="0 0 32 32" width="88" height="88" aria-hidden="true" style="margin:0 auto"><path d="M4 30V16a12 12 0 0 1 12-12v26z" fill="#26322A"/><path d="M28 30V16A12 12 0 0 0 16 4v26z" fill="#EE9A7C"/><circle cx="16" cy="19" r="5" fill="#F4EFE6"/><circle cx="16" cy="19" r="2.2" fill="#B8543A"/></svg><p class="small" style="margin-top:8px"><b>The seal.</b> At a mutual yes the seam closes with a wax-coloured seal. It is the only celebratory moment in the app and it lasts 650 ms.</p></div>
+</div>
+<dl class="kv" style="margin-top:18px">
+<dt>Letter</dt><dd>An introduction arrives as a folded page: first name and side on the outside, the "where you line up" row inside. Opening is progressive disclosure, never a swipe or a drag.</dd>
+<dt>Seal</dt><dd>Private answers show a small wax dot. Two dots become one seal when both are in.</dd>
+<dt>Plant</dt><dd>Eden's watercolour stages, drawn in the two seed colours on paper. The divider between the two plants fades with growth.</dd>
+<dt>Arch frame</dt><dd>Every photograph sits in an arch. Rounded top, square base, the same proportion throughout.</dd>
+<dt>Motion</dt><dd>140–350 ms for interface, up to 650 ms for a mutual reveal; staggered rise on scroll; everything off under <code>prefers-reduced-motion</code>; haptics native-only and optional.</dd>
+<dt>Imagery</dt><dd>Licensed photographs, downloaded and served from our domain, one warm grade, always credited, never captioned as members. No archival or rural imagery (it invites the political reading, D13). No stock portrait standing in for a member; every example labelled fictional.</dd>
+<dt>Copy</dt><dd>Warm and plain. Never political, never gendered, never a date promised, every figure labelled, counts under five never shown, no fake scarcity. "Example" and "not real members" wherever they apply.</dd>
+<dt>Access</dt><dd>WCAG 2.2 AA, 44 px targets, status always in text, one column at 390 px, no horizontal scroll, every image with alt text and dimensions.</dd>
+</dl>
+</div>
+</div>
+
+<h3 style="margin-top:48px">Screen anatomy for the chapters that have no reference yet</h3>
+<div class="grid g3" style="margin-top:16px">
+<div class="card"><h4>Garden · journey</h4><p>Paper ground. The dual plant top centre, stage sentence under it in italic Fraunces. Today's Question as a folded card. Then the activity list: a row per activity with a small wax dot for "your turn" and a seal for "both answered". A quiet "Ready to meet?" card appears at sprout, in the apricot tint, never as a modal.</p></div>
+<div class="card"><h4>Garden · reveal</h4><p>Night ground for the reveal only. Two columns on wide screens, two stacked cards on phones, your side first. Letter modality types onto a paper postcard; score modality counts up in Fraunces; drama modality pauses between the two. Afterwards three small prompts in a row, then "Reflect, then chat".</p></div>
+<div class="card"><h4>Together · dates</h4><p>Idea cards in the arch frame with a photograph from the category pool, title in Fraunces, a row of pills (cost, minutes, energy, access), the venue line, and a three-button vote row. The result line sits under the row: "Your answer is private until Theo answers" with the wax dot, or "A plan" with the seal.</p></div>
+</div>
+</div></section>
+<section class="sec" id="arch"><div class="wrap">
+<div class="eyebrow">07 · Architecture</div>
+<h2>One codebase, one database, one engine, three surfaces.</h2>
+<p class="lede">Today there are three stacks: FastAPI with an Expo client (Eden), Vercel functions on Neon Postgres with static pages (Evermore), and a vanilla-JS single-page app on Upstash Redis (Together). The recommendation is one TypeScript monorepo built on the Evermore API and database, because that is where accounts, safety, photos, the queue and the owners suite already run in production. Eden's engine is pure content and pure functions; it ports cleanly. This is an architecture decision for Ali (D70); the alternative is recorded below and in the epic.</p>
+
+<figure class="diagram" style="margin-top:32px"><svg viewBox="0 0 1080 460" role="img" aria-label="Architecture diagram: three clients, one API, engine package, Postgres, Blob, queue, owners suite">
+<g font-family="Instrument Sans,system-ui,sans-serif" font-size="12" fill="#1D1B18">
+<text x="20" y="28" font-size="11" letter-spacing="2" fill="#B8543A">CLIENTS</text>
+<rect x="20" y="40" width="200" height="70" rx="4" fill="#F4EFE6" stroke="#CBBFAB"/><text x="32" y="62" font-weight="600">apps/member</text><text x="32" y="80">Expo universal: iOS, Android, web</text><text x="32" y="96" fill="#4A453D">Doorway · Letters · Garden · Bridge · Together</text>
+<rect x="240" y="40" width="200" height="70" rx="4" fill="#F4EFE6" stroke="#CBBFAB"/><text x="252" y="62" font-weight="600">apps/site</text><text x="252" y="80">Static marketing, no build step</text><text x="252" y="96" fill="#4A453D">hero demo · why now · press · privacy · credits</text>
+<rect x="460" y="40" width="200" height="70" rx="4" fill="#171613"/><text x="472" y="62" font-weight="600" fill="#F4EFE6">apps/owners</text><text x="472" y="80" fill="#D9D1C0">Owners suite, as today</text><text x="472" y="96" fill="#A39C8C">queue · metrics · board · decisions · sprint</text>
+<rect x="680" y="40" width="380" height="70" rx="4" fill="#DDE9DF"/><text x="692" y="62" font-weight="600">packages/ui</text><text x="692" y="80">Design system: tokens, Fraunces/Instrument Sans, letter, seal, arch, plant</text><text x="692" y="96" fill="#4A453D">shared by member app and site; owners keeps its own</text>
+<path d="M120 110V150M340 110V150M560 110V150" stroke="#6B675C" stroke-width="1.5" marker-end="url(#ar)"/>
+<text x="20" y="146" font-size="11" letter-spacing="2" fill="#B8543A">API · VERCEL FUNCTIONS (NODE 24)</text>
+<rect x="20" y="156" width="640" height="110" rx="4" fill="#FFFDF8" stroke="#CBBFAB"/>
+<g font-size="11.5">
+<rect x="34" y="170" width="118" height="38" rx="3" fill="#F4EFE6"/><text x="42" y="186" font-weight="600">auth</text><text x="42" y="200" fill="#4A453D">invite · DOB · sessions</text>
+<rect x="160" y="170" width="118" height="38" rx="3" fill="#F4EFE6"/><text x="168" y="186" font-weight="600">profile</text><text x="168" y="200" fill="#4A453D">role · answers · games · seed</text>
+<rect x="286" y="170" width="118" height="38" rx="3" fill="#F4EFE6"/><text x="294" y="186" font-weight="600">letters</text><text x="294" y="200" fill="#4A453D">pool · allocation · yes/pass</text>
+<rect x="412" y="170" width="118" height="38" rx="3" fill="#F4EFE6"/><text x="420" y="186" font-weight="600">garden</text><text x="420" y="200" fill="#4A453D">sessions · reveal · growth</text>
+<rect x="538" y="170" width="110" height="38" rx="3" fill="#F4EFE6"/><text x="546" y="186" font-weight="600">messages</text><text x="546" y="200" fill="#4A453D">polling · prompts</text>
+<rect x="34" y="216" width="118" height="38" rx="3" fill="#F4EFE6"/><text x="42" y="232" font-weight="600">together</text><text x="42" y="246" fill="#4A453D">items · votes · ics · export</text>
+<rect x="160" y="216" width="118" height="38" rx="3" fill="#F4EFE6"/><text x="168" y="232" font-weight="600">photos</text><text x="168" y="246" fill="#4A453D">presign · review · window</text>
+<rect x="286" y="216" width="118" height="38" rx="3" fill="#FBE3D9"/><text x="294" y="232" font-weight="600">safety</text><text x="294" y="246" fill="#4A453D">block · report · ncii · contact</text>
+<rect x="412" y="216" width="118" height="38" rx="3" fill="#F4EFE6"/><text x="420" y="232" font-weight="600">chapters · waitlist</text><text x="420" y="246" fill="#4A453D">events · signups · export</text>
+<rect x="538" y="216" width="110" height="38" rx="3" fill="#F4EFE6"/><text x="546" y="232" font-weight="600">owners · metrics</text><text x="546" y="246" fill="#4A453D">aggregate only</text>
+</g>
+<rect x="680" y="156" width="380" height="110" rx="4" fill="#26322A"/><text x="692" y="178" font-weight="600" fill="#F4EFE6" font-size="13">packages/engine (pure TypeScript, ported from Python)</text>
+<text x="692" y="198" fill="#D9D1C0" font-size="11.5">activity catalogue and all 38 contents · stage rules · Gottman guard</text><text x="692" y="214" fill="#D9D1C0" font-size="11.5">scorer (games → traits) · compatibility · spark note · insights · echo</text><text x="692" y="230" fill="#D9D1C0" font-size="11.5">garden thresholds and events · sequencer · date templates and scoring</text><text x="692" y="246" fill="#D9D1C0" font-size="11.5">deciding (yes/maybe/pass) · 261 Eden tests become the port's spec</text><text x="692" y="260" fill="#EE9A7C" font-size="11">runs in the API and in the client (demo mode)</text>
+<path d="M660 211H680" stroke="#6B675C" stroke-width="1.5" marker-end="url(#ar)"/>
+<path d="M340 266V300" stroke="#6B675C" stroke-width="1.5" marker-end="url(#ar)"/>
+<text x="20" y="296" font-size="11" letter-spacing="2" fill="#B8543A">DATA</text>
+<rect x="20" y="306" width="300" height="60" rx="4" fill="#F4EFE6" stroke="#CBBFAB"/><text x="32" y="328" font-weight="600">Neon Postgres</text><text x="32" y="346" fill="#4A453D">one ordered migration list; PGlite in tests; pgvector later</text>
+<rect x="340" y="306" width="200" height="60" rx="4" fill="#F4EFE6" stroke="#CBBFAB"/><text x="352" y="328" font-weight="600">Vercel Blob (private)</text><text x="352" y="346" fill="#4A453D">photos, presigned 5-minute links</text>
+<rect x="560" y="306" width="220" height="60" rx="4" fill="#F4EFE6" stroke="#CBBFAB"/><text x="572" y="328" font-weight="600">Queue + webhook alerts</text><text x="572" y="346" fill="#4A453D">reports · removals · contact · photos</text>
+<rect x="800" y="306" width="260" height="60" rx="4" fill="#F4EFE6" stroke="#CBBFAB"/><text x="812" y="328" font-weight="600">Realtime (later)</text><text x="812" y="346" fill="#4A453D">live reveal over WebSocket; polling first</text>
+<text x="20" y="400" font-size="11" letter-spacing="2" fill="#B8543A">RETIRED</text>
+<text x="20" y="420" fill="#4A453D">server/ Express JSON store (its vouching and account routes move to the API) · Upstash Redis (Together records move to Postgres under the pair) · Eden's JWT and in-memory limiters · Eden's FastAPI (kept read-only as the port's reference until parity) · Flutter app · SwiftUI concept (reference only)</text>
+<text x="20" y="444" fill="#4A453D">Demo mode keeps working: the engine runs on the device and Together stores on-device until a shared space is turned on, exactly as alynol does today.</text>
+</g></svg><figcaption>Target architecture. One API in the Evermore style (one function per area, routed by path), one engine package shared by server and client, one database.</figcaption></figure>
+
+<div class="two" style="margin-top:36px">
+<div class="prose">
+<h3>The platform decision, written both ways</h3>
+<p style="margin-top:10px"><b>Recommended: Expo universal.</b> Eden's React Native app is the most complete client of the three (38 activity renderers, the whole garden), Expo Router produces web as well as iOS and Android from one codebase, and the SwiftUI concept is explicitly out of the beta. The web output is what the Texas beta ships; the store builds follow when the owners choose. Cost: editorial typography on the web output needs care; the design-system epic owns that.</p>
+<p><b>Alternative: web-first React, native later.</b> A Vite React app with the same engine package, and Capacitor or a second Expo client for the stores. Better type control on the web, two clients to keep in step. Pick this if the owners decide the web beta must look like the marketing site to the pixel.</p>
+<p><b>Either way:</b> the engine, the API, the database and the design tokens are the same, so the choice does not block any epic but the client ones. No manifest or service worker until SB 2420 is settled (D163).</p>
+<h3 style="margin-top:26px">Monetisation, all options kept</h3>
+<p style="margin-top:10px">Free in the founding metro, as decided. Then one subscription, tested with the Evermore cohorts from D11 ($14.99 a month or $79 a year against $24.99 or $129), web billing, the same price for every role and no sex- or age-based pricing. Eden's premium items (garden themes, activity packs, a written reflection in place of the "deep dive") and Together's paid weekly discovery are what the subscription contains; Eden's $12.99 and $79.99 price points sit inside the lower cohort. Petals (à-la-carte) and a matchmaking tier stay in the backlog. Pricing is Dominick's call; nothing about it is built before the beta.</p>
+</div>
+<div>
+<h3>Data model, unified</h3>
+<div class="tablewrap" style="margin-top:12px"><table>
+<tr><th>Table</th><th>From</th><th>Notes</th></tr>
+<tr><td><code>accounts</code>, <code>sessions</code>, <code>invite_codes</code>, <code>auth_rate_limits</code></td><td>Evermore</td><td>Eden <code>users</code> fold in; gender and looking-for become "open to meeting"</td></tr>
+<tr><td><code>profiles</code>, <code>non_negotiable_answers</code>, <code>sensitive_answers</code></td><td>Evermore</td><td>faith and health answers in a separate, opt-in table (MHMDA/TDPSA)</td></tr>
+<tr><td><code>trait_profiles</code></td><td>Eden <code>spark_quizzes</code></td><td>8 categorical + Big Five + attachment axes + communication axes; source = games or quiz</td></tr>
+<tr><td><code>profile_prompts</code>, <code>dealbreakers</code>, <code>seeds</code></td><td>Eden</td><td>as is</td></tr>
+<tr><td><code>photos</code>, <code>removal_*</code></td><td>Evermore</td><td>as is; photo window adds <code>photo_window_optins</code></td></tr>
+<tr><td><code>introduction_days</code>, <code>introductions</code>, <code>interests</code>, <code>matches</code></td><td>Evermore</td><td>Eden <code>likes</code>/<code>passes</code> fold into <code>interests</code>; ranking score stored per introduction, never served</td></tr>
+<tr><td><code>gardens</code>, <code>garden_events</code>, <code>activity_sessions</code>, <code>activity_responses</code>, <code>daily_question_responses</code>, <code>match_outcomes</code></td><td>Eden</td><td>as is; sessions never expire</td></tr>
+<tr><td><code>messages</code></td><td>Eden/Evermore</td><td>text only, report per thread</td></tr>
+<tr><td><code>pairs</code>, <code>pair_items</code>, <code>pair_votes</code>, <code>pair_notes</code></td><td>Together</td><td>a pair opens by double consent; items typed idea/trip/memory/note; votes sealed per item per member</td></tr>
+<tr><td><code>intentions</code>, <code>bridge_responses</code>, <code>date_proposals</code></td><td>New seam</td><td>the Bridge; proposals are pair_items of kind "first date"</td></tr>
+<tr><td><code>proving_records</code>, <code>vouches</code></td><td>Evermore</td><td>vouching ported from the local server (friends/community, confirm/decline)</td></tr>
+<tr><td><code>chapters</code>, <code>chapter_events</code>, <code>chapter_hosts</code></td><td>Evermore</td><td>verified hosts only</td></tr>
+<tr><td><code>blocks</code>, <code>reports</code>, <code>ncii_requests</code>, <code>contact_requests</code>, <code>queue_events</code>, <code>queue_alerts</code>, <code>authenticity_flags</code></td><td>Evermore + Eden</td><td>one queue; authenticity flags visible only to owners</td></tr>
+<tr><td><code>waitlist_signups</code>, owner tables (<code>owner_users</code>, <code>ledger_entries</code>, <code>budgets</code>, <code>sprints</code>, <code>tasks</code>, <code>meetings</code>, <code>retro_items</code>, <code>board_messages</code>, …)</td><td>Evermore</td><td>unchanged</td></tr>
+</table></div>
+<p class="small muted" style="margin-top:10px">Migrations stay an ordered, append-only list as in <code>api/_lib/db.js</code>. Stage-3 and later disclosure data is deleted 30 days after a match ends (Eden's rule). Owners' metrics read aggregates only and hide counts under five.</p>
+</div>
+</div>
+</div></section>
+
+<section class="sec band" id="safety"><div class="wrap">
+<div class="eyebrow">08 · Trust, safety and privacy</div>
+<h2>Safety always wins. It is a system, not a screen.</h2>
+<p class="lede">Evermore built the operating system for this: a queue with deadlines, an audit trail, alerts, withholding, image hashing and a human reading every report. Eden adds the Authenticity Signal and the Stage 3 safeguards. Together adds the privacy posture: demo mode, export, delete, nothing sold. All of it carries over.</p>
+
+<figure class="diagram" style="margin-top:32px"><svg viewBox="0 0 1080 300" role="img" aria-label="Safety pipeline from member actions to the owners queue, with deadlines">
+<g font-family="Instrument Sans,system-ui,sans-serif" font-size="12" fill="#EFE7DA">
+<text x="20" y="26" font-size="11" letter-spacing="2" fill="#EE9A7C">INPUTS</text>
+<rect x="20" y="40" width="150" height="44" rx="3" fill="#2A2922" stroke="#3A382F"/><text x="30" y="58" font-weight="600">Block</text><text x="30" y="74" fill="#A39C8C" font-size="11">instant, not notified</text>
+<rect x="20" y="92" width="150" height="44" rx="3" fill="#2A2922" stroke="#3A382F"/><text x="30" y="110" font-weight="600">Report</text><text x="30" y="126" fill="#A39C8C" font-size="11">also blocks · P0 / P1</text>
+<rect x="20" y="144" width="150" height="44" rx="3" fill="#2A2922" stroke="#3A382F"/><text x="30" y="162" font-weight="600">Intimate-image removal</text><text x="30" y="178" fill="#A39C8C" font-size="11">no account needed</text>
+<rect x="20" y="196" width="150" height="44" rx="3" fill="#2A2922" stroke="#3A382F"/><text x="30" y="214" font-weight="600">Contact request</text><text x="30" y="230" fill="#A39C8C" font-size="11">privacy · correction · other</text>
+<rect x="20" y="248" width="150" height="44" rx="3" fill="#2A2922" stroke="#3A382F"/><text x="30" y="266" font-weight="600">Authenticity flag</text><text x="30" y="282" fill="#A39C8C" font-size="11">automatic, invisible to members</text>
+<path d="M170 62H230M170 114H230M170 166H230M170 218H230M170 270H230" stroke="#6B675C" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="232" y="40" width="230" height="252" rx="4" fill="#26322A"/><text x="246" y="64" font-weight="600" fill="#F4EFE6" font-size="13">Immediate effects</text>
+<text x="246" y="88" font-size="11.5">pair cleared from each other's letters</text><text x="246" y="106" font-size="11.5">garden set dormant, thread ended</text><text x="246" y="124" font-size="11.5">reported member withheld from all</text><text x="246" y="142" font-size="11.5">introductions while P0 is open</text><text x="246" y="166" font-size="11.5">removal: 36 h auto-hide of matches</text><text x="246" y="184" font-size="11.5">SHA-256 + dHash ≤ 6 bits, exact and</text><text x="246" y="202" font-size="11.5">near copies hidden, blocklist on close</text><text x="246" y="226" font-size="11.5">authenticity: sequencer prefers hard-</text><text x="246" y="244" font-size="11.5">to-fake activities; gentle nudge to the</text><text x="246" y="262" font-size="11.5">member; wild inconsistency escalates</text>
+<path d="M462 166H522" stroke="#6B675C" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="524" y="40" width="300" height="252" rx="4" fill="#2A2922" stroke="#3A382F"/><text x="538" y="64" font-weight="600" fill="#F4EFE6" font-size="13">Owners queue (safety queue)</text>
+<text x="538" y="90" font-size="11.5">P0 (intimate images, underage, unsafe):</text><text x="538" y="106" font-size="11.5" fill="#EE9A7C">acknowledge 1 h · act 24 h</text>
+<text x="538" y="128" font-size="11.5">P1 (harassment, fake, spam, other): 24 h</text>
+<text x="538" y="150" font-size="11.5">Removal: due 48 h (TAKE IT DOWN Act)</text><text x="538" y="166" font-size="11.5" fill="#A39C8C">target 24 h · evidence deleted ≤ 30 days</text>
+<text x="538" y="188" font-size="11.5">Contact: first reply 12 h</text>
+<text x="538" y="210" font-size="11.5">Photo review: 24 h, human, every photo</text>
+<text x="538" y="236" font-size="11.5">take / hand off / release · resolve with</text><text x="538" y="252" font-size="11.5">outcome and note · every view audited</text><text x="538" y="274" font-size="11.5">a ban needs two reviewers (B16)</text>
+<path d="M824 166H884" stroke="#6B675C" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="886" y="40" width="174" height="252" rx="4" fill="#2A2922" stroke="#3A382F"/><text x="900" y="64" font-weight="600" fill="#F4EFE6" font-size="13">Alerts and record</text>
+<text x="900" y="90" font-size="11.5">webhook on new item and</text><text x="900" y="106" font-size="11.5">at 24 h untouched; payload</text><text x="900" y="122" font-size="11.5">is kind, ticket, due time only</text>
+<text x="900" y="150" font-size="11.5">append-only queue_events</text><text x="900" y="166" font-size="11.5">(received, assigned, viewed,</text><text x="900" y="182" font-size="11.5">resolved, alert_sent…)</text>
+<text x="900" y="210" font-size="11.5">metrics: 100% of reports</text><text x="900" y="226" font-size="11.5">inside SLA is an OKR</text>
+<text x="900" y="254" font-size="11.5" fill="#A39C8C">counts under five never</text><text x="900" y="270" font-size="11.5" fill="#A39C8C">shown anywhere</text>
+</g></svg><figcaption>The safety pipeline as it runs today in the Evermore repository, with Eden's Authenticity Signal added as a fifth input. Deadlines from <code>api/_lib/queue.js</code>; the 48 h clock from the TAKE IT DOWN Act<sup class="ref"><a href="#s28">28</a></sup>.</figcaption></figure>
+
+<div class="two" style="margin-top:36px">
+<div class="tablewrap"><table>
+<tr><th>State</th><th>Allowed</th><th>Forbidden</th></tr>
+<tr><td>Signed out</td><td>Brand, demo mode, waitlist, policy</td><td>Any introduction</td></tr>
+<tr><td>Incomplete doorway</td><td>Own role and answers, honest gating</td><td>Other members, letters</td></tr>
+<tr><td>Eligible, pool not ready</td><td>Area status, edit answers, invite route</td><td>Names, photos, counts under 5</td></tr>
+<tr><td>A letter</td><td>First name, side, line-up row, spark line, yes/pass</td><td>Face, age, bio, answers, location, %</td></tr>
+<tr><td>One-sided yes</td><td>Own decision state</td><td>Any signal to the other member</td></tr>
+<tr><td>Mutual seal</td><td>Garden, conversation, Today's Question</td><td>Photos before double opt-in</td></tr>
+<tr><td>Photo window</td><td>Approved photos, 5-minute links</td><td>Unapproved photo, EXIF, early reveal</td></tr>
+<tr><td>Bridge</td><td>Bridge answers after both, date proposals</td><td>Either side's votes before both exist</td></tr>
+<tr><td>Together</td><td>All shared records, export, close</td><td>Scores, streaks, the other side's private notes</td></tr>
+<tr><td>Blocked / reported / withheld</td><td>Safety actions, neutral explanation</td><td>Pairing, notifications, reveals</td></tr>
+</table></div>
+<div class="prose">
+<h3>Privacy, in plain terms</h3>
+<p style="margin-top:10px">No analytics, no advertising, no tracking, nothing sold, nobody reads your notes. Together's demo mode runs entirely on the device and the API answers 401 until a shared space is turned on. Every member can export everything they put in as plain JSON and delete their account outright; a shared space closes with each person keeping their own side. Photos are re-encoded with location and camera data stripped and served by five-minute links. Faith and health answers live in a separate opt-in store with their own consent (MHMDA, TDPSA). Stage-3 disclosures are deleted thirty days after a match ends. Sealed notes are stored in plain text and the privacy page says so: sealing is a product behaviour, not encryption.</p>
+<p>The Texas notice: Evermore performs no criminal background checks and says so in bold capitals where Texas Business &amp; Commerce Code ch. 106 requires it (B18). Dating is not an FCRA permissible purpose, so a background-check tier needs legal review before it is priced.</p>
+</div>
+</div>
+
+<h3 style="margin-top:56px;color:var(--night-ink)">Things this app will never do</h3>
+<div class="never" style="margin-top:18px">
+<div><b>No scores</b><p>No relationship health rating, no compatibility percentage, no weekly grade. The ranking exists; you never see it.</p></div>
+<div><b>No streaks, no guilt</b><p>Nothing breaks if you ignore it for a month. No notification exists to make you feel you are failing at something you chose for fun.</p></div>
+<div><b>No one-sided reveal</b><p>A yes, an answer or a vote is never shown until the other one exists. A pass never shows as a rejection.</p></div>
+<div><b>No faces first</b><p>Answers before photographs. No face before the mutual seal, and then only when both opt in.</p></div>
+<div><b>No fake anything</b><p>No invented counts, testimonials, scarcity or encryption claims. Examples are labelled fictional. Counts under five are not shown.</p></div>
+<div><b>No read receipts</b><p>No last-active, no typing indicators, no pay-to-see-who-liked-you, no timers that punish.</p></div>
+<div><b>No assigned roles</b><p>Roles are jobs you choose, not genders you were born into. Either side, anyone, reversible.</p></div>
+<div><b>No hostage history</b><p>Export everything at any time in a format readable without us. Leave with your side intact.</p></div>
+</div>
+</div></section>
+<section class="sec" id="plan"><div class="wrap">
+<div class="eyebrow">09 · Build plan</div>
+<h2>Fourteen epics, six milestones, nothing thrown away.</h2>
+<p class="lede">The backlog lives as GitHub issues in <a href="https://github.com/asaad-jaegerlabs/alynol/issues">asaad-jaegerlabs/alynol</a>, the empty repository behind the production Evermore project. Each epic below is an issue with child issues; each child carries a user story, scope, acceptance criteria, visual direction, dependencies and the sources it rests on. The Evermore repository's own 74 open issues for its December beta are referenced, not duplicated: that beta ships on its own repository and the unified app absorbs it at M1.</p>
+
+<div class="grid g3" style="margin-top:32px">
+<div class="card"><h4>M0 · Foundations</h4><p>Monorepo, design system, engine port with Eden's tests passing, unified schema and migrations, auth and invites, CI. Nothing member-facing yet.</p></div>
+<div class="card"><h4>M1 · Letters (wave-0 parity)</h4><p>Doorway, three sealed letters a day, the mutual seal, conversation, photos, safety and queue, owners suite, marketing site. Equivalent to the tradWives December beta, on the new base; members migrate.</p></div>
+<div class="card"><h4>M2 · The Garden</h4><p>All 38 activities, the reveal, growth, Today's Question, insights, photo window, memory book, live reveal.</p></div>
+<div class="card"><h4>M3 · Bridge and Together</h4><p>Bloom, intentions road, date designer into the deciding engine, we-met, then the six Together tabs, export, close.</p></div>
+<div class="card"><h4>M4 · Community and trust</h4><p>Chapters, weekly discovery, Proving verification, vouching, Authenticity Signal, Connection-stage activities, subscription.</p></div>
+<div class="card"><h4>M5 · Native and hardening</h4><p>iOS and Android builds, push (opt-in), security review, load, restore drill, accessibility audit, the owners' go/no-go.</p></div>
+</div>
+
+<h3 style="margin-top:48px">Epics</h3>
+<div class="epics" style="display:grid;gap:12px;margin-top:16px" id="epic-list">
+<div class="epic"><div><h4><a href="https://github.com/asaad-jaegerlabs/alynol/issues/1" style="text-decoration:none;color:inherit">Platform and monorepo foundations <span class="mono small" style="color:var(--clay)">#1</span></a></h4><p>One repo, one API, one database, one engine package; the platform ADR; CI; migrations; demo-mode engine on the client. <span class="small muted">Issues #15, #16, #17, #18, #20, #21.</span></p></div><span class="m">M0</span></div>
+<div class="epic"><div><h4><a href="https://github.com/asaad-jaegerlabs/alynol/issues/2" style="text-decoration:none;color:inherit">Design system: two halves, one doorway <span class="mono small" style="color:var(--clay)">#2</span></a></h4><p>Tokens, type decision, the split arch and seal, letter / plant / arch-frame components, motion and accessibility rules, dark mode, imagery pipeline. <span class="small muted">Issues #19, #22, #23, #24.</span></p></div><span class="m">M0</span></div>
+<div class="epic"><div><h4><a href="https://github.com/asaad-jaegerlabs/alynol/issues/3" style="text-decoration:none;color:inherit">Doorway: accounts and onboarding <span class="mono small" style="color:var(--clay)">#3</span></a></h4><p>Invite-only accounts, Chosen Doorway, non-negotiables one at a time, three games and the quiz fallback, Garden DNA, seed, prompts, dealbreakers, private photos. <span class="small muted">Issues #25, #26, #27, #28, #29, #30.</span></p></div><span class="m">M1</span></div>
+<div class="epic"><div><h4><a href="https://github.com/asaad-jaegerlabs/alynol/issues/4" style="text-decoration:none;color:inherit">Letters: three sealed introductions a day <span class="mono small" style="color:var(--clay)">#4</span></a></h4><p>Eligibility filters, ranking, reciprocal allocation, honest pool states, the letter, sealed yes/pass, capacity nudge, the mutual seal. <span class="small muted">Issues #31, #32, #33, #34, #35.</span></p></div><span class="m">M1</span></div>
+<div class="epic"><div><h4><a href="https://github.com/asaad-jaegerlabs/alynol/issues/5" style="text-decoration:none;color:inherit">The Garden: activities and the reveal <span class="mono small" style="color:var(--clay)">#5</span></a></h4><p>Catalogue and content port, sessions, both-answer-before-reveal, three modalities, live reveal, micro-prompts, Stage 3 safeguards, Gottman guard. <span class="small muted">Issues #36, #37, #38, #39, #40.</span></p></div><span class="m">M2</span></div>
+<div class="epic"><div><h4><a href="https://github.com/asaad-jaegerlabs/alynol/issues/6" style="text-decoration:none;color:inherit">The Garden: growth, insights and memory <span class="mono small" style="color:var(--clay)">#6</span></a></h4><p>Growth and stages, dual plant, events, presence and momentum, Today's Question, Connection Echo, qualitative insights, memory book, share cards, themes. <span class="small muted">Issues #41, #42, #43, #44.</span></p></div><span class="m">M2</span></div>
+<div class="epic"><div><h4><a href="https://github.com/asaad-jaegerlabs/alynol/issues/7" style="text-decoration:none;color:inherit">Conversation and the Photo Window <span class="mono small" style="color:var(--clay)">#7</span></a></h4><p>Text messaging with prompts, report per thread, block ends thread; graduated photo reveal by double opt-in on approved photos. <span class="small muted">Issues #45, #46.</span></p></div><span class="m">M1–M2</span></div>
+<div class="epic"><div><h4><a href="https://github.com/asaad-jaegerlabs/alynol/issues/8" style="text-decoration:none;color:inherit">The Bridge: from bloom to the first table <span class="mono small" style="color:var(--clay)">#8</span></a></h4><p>Bloom and ready-to-meet, bridge questions, intentions road, date designer, first date decided double-blind, meeting prep, we met, debrief, check-in. <span class="small muted">Issues #47, #48, #49, #50.</span></p></div><span class="m">M3</span></div>
+<div class="epic"><div><h4><a href="https://github.com/asaad-jaegerlabs/alynol/issues/9" style="text-decoration:none;color:inherit">Together: the shared space <span class="mono small" style="color:var(--clay)">#9</span></a></h4><p>Consent setup, Today, Dates with filters and weekly discovery, Trips, Upcoming with ICS, Memories, Notes for later with the time capsule, export, close, demo mode. <span class="small muted">Issues #51, #52, #53, #54, #55, #56.</span></p></div><span class="m">M3</span></div>
+<div class="epic"><div><h4><a href="https://github.com/asaad-jaegerlabs/alynol/issues/10" style="text-decoration:none;color:inherit">Trust and safety operations <span class="mono small" style="color:var(--clay)">#10</span></a></h4><p>Block and report, queue and SLAs, withholding, intimate-image removal and hashing, contact requests, Texas notice, deletion cascade and export, Authenticity Signal, community integrity. <span class="small muted">Issues #57, #58, #59, #60, #61.</span></p></div><span class="m">M1–M4</span></div>
+<div class="epic"><div><h4><a href="https://github.com/asaad-jaegerlabs/alynol/issues/11" style="text-decoration:none;color:inherit">Chapters and the Proving <span class="mono small" style="color:var(--clay)">#11</span></a></h4><p>Per-city verified events and hosts, local partners, events into weekly discovery, Proving ledger and verification tiers, vouching ported from the local server. <span class="small muted">Issues #62, #63, #64, #65, #66.</span></p></div><span class="m">M4</span></div>
+<div class="epic"><div><h4><a href="https://github.com/asaad-jaegerlabs/alynol/issues/12" style="text-decoration:none;color:inherit">Owners suite and metrics <span class="mono small" style="color:var(--clay)">#12</span></a></h4><p>Keep every section; add garden and Together aggregates, authenticity escalations, Chapter verification, pricing-cohort readouts; counts under five hidden. <span class="small muted">Issues #67, #68.</span></p></div><span class="m">M1–M4</span></div>
+<div class="epic"><div><h4><a href="https://github.com/asaad-jaegerlabs/alynol/issues/13" style="text-decoration:none;color:inherit">Marketing site and waitlist <span class="mono small" style="color:var(--clay)">#13</span></a></h4><p>Merged site: two-halves hero with the working demo, journey, garden, "why this works", FAQ, privacy, press, why-now, credits; waitlist with ZIP and how-heard; unsupported claims removed. <span class="small muted">Issues #69, #70, #71.</span></p></div><span class="m">M1</span></div>
+<div class="epic"><div><h4><a href="https://github.com/asaad-jaegerlabs/alynol/issues/14" style="text-decoration:none;color:inherit">Subscription, native builds and launch hardening <span class="mono small" style="color:var(--clay)">#14</span></a></h4><p>One subscription with the D11 cohorts, web billing; iOS/Android via Expo; opt-in push; CSP, abuse review, load, restore drill, accessibility; go/no-go. <span class="small muted">Issues #72, #73, #74, #75.</span></p></div><span class="m">M4–M5</span></div>
+</div>
+<p class="small muted" style="margin-top:14px" id="issue-note">Created 27 October 2026: epics #1–#14 and child issues #15–#75 in <a href="https://github.com/asaad-jaegerlabs/alynol/issues">asaad-jaegerlabs/alynol</a>, labelled by milestone and area, each child attached to its epic as a sub-issue. Every child issue carries a user story, scope, acceptance criteria, visual direction, dependencies and sources.</p>
+</div></section>
+
+<section class="sec" id="sources"><div class="wrap">
+<div class="eyebrow">10 · Sources</div>
+<h2>Sources</h2>
+<p class="muted" style="max-width:var(--measure);margin-top:8px">Peer-reviewed studies and primary documents cited on this page. Industry figures from the three repositories' own research (the Evermore dossier, Eden's panels) are used only where they carry a label.</p>
+<ol class="refs" style="margin-top:24px">
+<li id="s1">Aron, A., Melinat, E., Aron, E. N., Vallone, R. D., &amp; Bator, R. J. (1997). The experimental generation of interpersonal closeness: A procedure and some preliminary findings. <i>Personality and Social Psychology Bulletin, 23</i>(4), 363–377. <a href="https://doi.org/10.1177/0146167297234003">doi:10.1177/0146167297234003</a></li>
+<li id="s2">Aron, A., Norman, C. C., Aron, E. N., McKenna, C., &amp; Heyman, R. E. (2000). Couples' shared participation in novel and arousing activities and experienced relationship quality. <i>Journal of Personality and Social Psychology, 78</i>(2), 273–284. <a href="https://doi.org/10.1037/0022-3514.78.2.273">doi:10.1037/0022-3514.78.2.273</a></li>
+<li id="s3">Sprecher, S., Treger, S., Wondra, J. D., Hilaire, N., &amp; Wallpe, K. (2013). Taking turns: Reciprocal self-disclosure promotes liking in initial interactions. <i>Journal of Experimental Social Psychology, 49</i>(5), 860–866. <a href="https://doi.org/10.1016/j.jesp.2013.03.017">doi:10.1016/j.jesp.2013.03.017</a></li>
+<li id="s4">Reis, H. T., &amp; Shaver, P. (1988). Intimacy as an interpersonal process. In S. Duck (Ed.), <i>Handbook of personal relationships</i> (pp. 367–389). Wiley.</li>
+<li id="s5">Zhang, T., Kim, T., Brooks, A. W., Gino, F., &amp; Norton, M. I. (2014). A "present" for the future: The unexpected value of rediscovery. <i>Psychological Science, 25</i>(10), 1851–1860. <a href="https://doi.org/10.1177/0956797614542274">doi:10.1177/0956797614542274</a></li>
+<li id="s6">Girme, Y. U., Overall, N. C., &amp; Faingataa, S. (2014). "Date nights" take two: The maintenance function of shared relationship activities. <i>Personal Relationships, 21</i>(1), 125–149. <a href="https://doi.org/10.1111/pere.12020">doi:10.1111/pere.12020</a></li>
+<li id="s7">Harasymchuk, C., Walker, D. L., Muise, A., &amp; Impett, E. A. (2021). Planning date nights that promote closeness: The roles of relationship goals and self-expansion. <i>Journal of Social and Personal Relationships, 38</i>(5), 1692–1709. <a href="https://doi.org/10.1177/02654075211000436">doi:10.1177/02654075211000436</a></li>
+<li id="s8">Driver, J. L., &amp; Gottman, J. M. (2004). Daily marital interactions and positive affect during marital conflict among newlywed couples. <i>Family Process, 43</i>(3), 301–314. <a href="https://pubmed.ncbi.nlm.nih.gov/15386956/">PubMed 15386956</a></li>
+<li id="s9">Gable, S. L., Reis, H. T., Impett, E. A., &amp; Asher, E. R. (2004). What do you do when things go right? The intrapersonal and interpersonal benefits of sharing positive events. <i>Journal of Personality and Social Psychology, 87</i>(2), 228–245. <a href="https://pubmed.ncbi.nlm.nih.gov/15301629/">PubMed 15301629</a></li>
+<li id="s10">Hazan, C., &amp; Shaver, P. (1987). Romantic love conceptualized as an attachment process. <i>Journal of Personality and Social Psychology, 52</i>(3), 511–524. <a href="https://doi.org/10.1037/0022-3514.52.3.511">doi:10.1037/0022-3514.52.3.511</a></li>
+<li id="s11">Finkel, E. J., Eastwick, P. W., Karney, B. R., Reis, H. T., &amp; Sprecher, S. (2012). Online dating: A critical analysis from the perspective of psychological science. <i>Psychological Science in the Public Interest, 13</i>(1), 3–66. <a href="https://doi.org/10.1177/1529100612436522">doi:10.1177/1529100612436522</a></li>
+<li id="s12">Joel, S., Eastwick, P. W., &amp; Finkel, E. J. (2017). Is romantic desire predictable? Machine learning applied to initial romantic attraction. <i>Psychological Science, 28</i>(10), 1478–1489. <a href="https://doi.org/10.1177/0956797617714580">doi:10.1177/0956797617714580</a></li>
+<li id="s13">Pew Research Center (2023, February 2). <i>Key findings about online dating in the U.S.</i> and <i>From looking for love to swiping the field: Online dating in the U.S.</i> <a href="https://www.pewresearch.org/short-reads/2023/02/02/key-findings-about-online-dating-in-the-u-s/">pewresearch.org</a></li>
+<li id="s14">Forbes Health / OnePoll (2024). <i>Dating app fatigue survey</i>: 78% of users report feeling burned out by dating apps at least sometimes. <a href="https://www.forbes.com/health/dating/dating-app-fatigue/">forbes.com/health</a> (survey, not peer-reviewed)</li>
+<li id="s15">Impett, E. A., Park, H. G., &amp; Muise, A. (2024). Popular psychology through a scientific lens: Evaluating love languages from a relationship science perspective. <i>Current Directions in Psychological Science, 33</i>(2), 87–92. <a href="https://doi.org/10.1177/09637214231217663">doi:10.1177/09637214231217663</a></li>
+<li id="s16">Iyengar, S. S., &amp; Lepper, M. R. (2000). When choice is demotivating: Can one desire too much of a good thing? <i>Journal of Personality and Social Psychology, 79</i>(6), 995–1006. <a href="https://doi.org/10.1037/0022-3514.79.6.995">doi:10.1037/0022-3514.79.6.995</a></li>
+<li id="s17">Rosenfeld, M. J., Thomas, R. J., &amp; Hausen, S. (2019). Disintermediating your friends: How online dating in the United States displaces other ways of meeting. <i>PNAS, 116</i>(36), 17753–17758. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6731751/">PMC6731751</a></li>
+<li id="s18">Montoya, R. M., Horton, R. S., &amp; Kirchner, J. (2008). Is actual similarity necessary for attraction? A meta-analysis of actual and perceived similarity. <i>Journal of Social and Personal Relationships, 25</i>(6), 889–922. <a href="https://doi.org/10.1177/0265407508096700">doi:10.1177/0265407508096700</a></li>
+<li id="s19">Hall, J. A. (2017). Humor in romantic relationships: A meta-analysis. <i>Personal Relationships, 24</i>(2), 306–322. <a href="https://doi.org/10.1111/pere.12183">doi:10.1111/pere.12183</a></li>
+<li id="s20">Reis, H. T., Maniaci, M. R., Caprariello, P. A., Eastwick, P. W., &amp; Finkel, E. J. (2011). Familiarity does indeed promote attraction in live interaction. <i>Journal of Personality and Social Psychology, 101</i>(3), 557–570. <a href="https://www.sas.rochester.edu/psy/people/faculty/reis_harry/assets/pdf/ReisManiaciCaprarielloEastwickFinkel_2011.pdf">PDF (Rochester)</a></li>
+<li id="s21">Mikulincer, M., &amp; Shaver, P. R. (2007). <i>Attachment in adulthood: Structure, dynamics, and change.</i> Guilford Press.</li>
+<li id="s22">Joel, S., Eastwick, P. W., et al. (2020). Machine learning uncovers the most robust self-report predictors of relationship quality across 43 longitudinal couples studies. <i>PNAS, 117</i>(32), 19061–19071. <a href="https://doi.org/10.1073/pnas.1917036117">doi:10.1073/pnas.1917036117</a></li>
+<li id="s23">Gottman, J. M., &amp; Levenson, R. W. (1992). Marital processes predictive of later dissolution: Behavior, physiology, and health. <i>Journal of Personality and Social Psychology, 63</i>(2), 221–233. <a href="https://doi.org/10.1037/0022-3514.63.2.221">doi:10.1037/0022-3514.63.2.221</a></li>
+<li id="s24">Whitchurch, E. R., Wilson, T. D., &amp; Gilbert, D. T. (2011). "He loves me, he loves me not…": Uncertainty can increase romantic attraction. <i>Psychological Science, 22</i>(2), 172–175. <a href="https://doi.org/10.1177/0956797610393745">doi:10.1177/0956797610393745</a></li>
+<li id="s25">Revilla, M., &amp; Ochoa, C. (2017). Ideal and maximum length for a web survey. <i>International Journal of Market Research, 59</i>(5), 557–565. <a href="https://doi.org/10.2501/IJMR-2017-039">doi:10.2501/IJMR-2017-039</a></li>
+<li id="s26">Vazire, S. (2010). Who knows what about a person? The self–other knowledge asymmetry (SOKA) model. <i>Journal of Personality and Social Psychology, 98</i>(2), 281–300. <a href="https://doi.org/10.1037/a0017908">doi:10.1037/a0017908</a></li>
+<li id="s27">FTC Consumer Sentinel data as reported by Global Dating Insights (2026): 55,604 romance-scam reports and more than $1.16B in reported losses in the first nine months of 2025, up 22%. <a href="https://www.globaldatinginsights.com/news/romance-scams-outpace-other-fraud-types-at-1-16-billion/">globaldatinginsights.com</a> (secondary report of FTC data)</li>
+<li id="s28">TAKE IT DOWN Act, Public Law 119-12 (2025), §3: 48-hour removal duty for covered platforms. <a href="https://www.congress.gov/119/plaws/publ12/PLAW-119publ12.htm">congress.gov</a></li>
+<li id="s29">Stripe Identity pricing: $1.50 per verification, first 50 free. <a href="https://stripe.com/identity">stripe.com/identity</a> (read 2026-10-18 in the Evermore repository)</li>
+<li id="s30">Landers, R. N., &amp; Sanchez, D. R. (2022). Game-based, gamified, and gamefully designed assessments for employee selection: Definitions, distinctions, design, and validation. <i>International Journal of Selection and Assessment, 30</i>(1), 1–13. <a href="https://doi.org/10.1111/ijsa.12376">doi:10.1111/ijsa.12376</a></li>
+<li id="s31">Collins, N. L., &amp; Miller, L. C. (1994). Self-disclosure and liking: A meta-analytic review. <i>Psychological Bulletin, 116</i>(3), 457–475. <a href="https://doi.org/10.1037/0033-2909.116.3.457">doi:10.1037/0033-2909.116.3.457</a></li>
+<li id="s32">Laurenceau, J.-P., Barrett, L. F., &amp; Pietromonaco, P. R. (1998). Intimacy as an interpersonal process: The importance of self-disclosure, partner disclosure, and perceived partner responsiveness in interpersonal exchanges. <i>Journal of Personality and Social Psychology, 74</i>(5), 1238–1251. <a href="https://doi.org/10.1037/0022-3514.74.5.1238">doi:10.1037/0022-3514.74.5.1238</a></li>
+</ol>
+<p class="small muted" style="margin-top:18px">Repository sources read for this document: <code>tradWives</code> (site, app, api, server, owners-app, docs/exec, docs/build, docs/product/evermore-experience, research-report.html, concept-playground.html), <code>matchmaker</code> (backend, eden-mobile, mobile, eden-web-demo, landing, docs/research, docs/design, docs/plans, RESEARCH_REPORT_CONNECTION_PSYCHOLOGY.md), the live <code>evermore-together.vercel.app</code> deployment (the <code>alynol</code> repository is empty) and the 27 October build and deployment report.</p>
+
+<h3 style="margin-top:44px">Image credits</h3>
+<div class="credits" style="margin-top:12px">
+<p>Pexels License, served from this page: #19793454, #5425602, #32738698, #36765874, #95425, #16901401, #6693557, #6670130, #7015070, #12298227, #2521560, #35652755, #36057108, #5975591, #64776 (<a href="https://www.pexels.com/license/">pexels.com/license</a>). The same fifteen photographs the Evermore Together site credits.</p>
+<p>CC0 1.0 via Wikimedia Commons, from the Evermore site: "Flat in Budapest" by David Hellmann; "Brunching with Friends" by Ali Inay; "Kitchen table" by Clem Onojeghuo; "Warm light in the dining room" by eberhard grossgasteiger.</p>
+<p>Garden stages, seeds and the entwined mark: illustrations from the Eden repository (<code>images/</code>). Screen references 01–09: <code>tradWives/docs/product/evermore-experience/screens</code>. The people pictured are not members and have no connection to Evermore.</p>
+</div>
+</div></section>
+
+<footer><div class="wrap">
+<p><b>Evermore</b> · unified product document · prepared 27 October 2026 for Ali and Dominick. Decisions in this document are proposals; the owners decide (D70, D71). <a href="demo.html">Walkthrough demo</a> · <a href="https://github.com/asaad-jaegerlabs/alynol/issues">Issues</a> · <a href="#top">Top</a></p>
+</div></footer>
+
+<script>
+(function(){
+  // Demo 1: sealed letter
+  var dl=document.getElementById('d-letter'), dlOut=dl.querySelector('.result');
+  var theo='yes';
+  dl.querySelectorAll('.vote button').forEach(function(b){
+    b.addEventListener('click',function(){
+      dl.querySelectorAll('.vote button').forEach(function(x){x.setAttribute('aria-pressed','false')});
+      b.setAttribute('aria-pressed','true');
+      var v=b.getAttribute('data-v');
+      if(v==='yes'&&theo==='yes'){dlOut.className='result yes';dlOut.innerHTML='<b>You both said yes.</b> A beginning, not a promise. A garden is planted with both seeds, and the conversation opens.';}
+      else if(v==='yes'){dlOut.className='result';dlOut.innerHTML='<span class="sealed">Your yes is private until Theo answers.</span> If he passes, this letter simply stops appearing.';}
+      else {dlOut.className='result';dlOut.innerHTML='<span class="sealed">Passed.</span> Theo is never told. This letter stops appearing; his answer stays sealed for good.';}
+    });
+  });
+
+  // Demo 2: both answer then reveal
+  var gIn=document.getElementById('d-garden-in'),gGo=document.getElementById('d-garden-go'),gOut=document.getElementById('d-garden-out'),gBar=document.getElementById('d-garden-bar'),gStage=document.getElementById('d-garden-stage');
+  var theoDay='Up before anyone else, a long run by the river, then pancakes I have no business attempting. The afternoon is a bookshop and nowhere to be. Dinner is whoever turns up, and the evening is a film we have both seen before.';
+  gGo.addEventListener('click',function(){
+    var mine=(gIn.value||'').trim();
+    if(!mine){gIn.focus();gIn.setAttribute('aria-invalid','true');return;}
+    gGo.disabled=true;gIn.disabled=true;
+    gOut.hidden=false;gOut.className='result';
+    gOut.innerHTML='<div class="small" style="letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--clay)">Revealing in 3…</div>';
+    var n=3;var t=setInterval(function(){n--;if(n>0){gOut.firstChild.textContent='Revealing in '+n+'…';return;}clearInterval(t);
+      gOut.innerHTML='<p class="small" style="font-weight:600">You</p><p style="margin-bottom:10px">'+mine.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})+'</p><p class="small" style="font-weight:600">Theo</p><p id="d-type" style="font-family:var(--f-display);font-size:17px;line-height:1.5"></p><p class="small muted" style="margin-top:10px">Your garden grew. Did he surprise you? <button type="button" class="btn ghost" style="min-height:32px;padding:4px 10px;font-size:13px">Yes</button> <button type="button" class="btn ghost" style="min-height:32px;padding:4px 10px;font-size:13px">Not really</button></p>';
+      var el=document.getElementById('d-type'),words=theoDay.split(' '),i=0;
+      var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(reduce){el.textContent=theoDay;}else{var w=setInterval(function(){el.textContent+=(i?' ':'')+words[i++];if(i>=words.length)clearInterval(w);},70);}
+      gBar.style.width='27%';gStage.textContent='Seed · 30 pts';
+      setTimeout(function(){gBar.style.width='30%';gStage.textContent='Sprout · 30 pts';},900);
+    },700);
+  });
+
+  // Demo 3: deciding
+  var ideas=[{t:'Hand-building night at a ceramics studio',m:'$25 · 2 h · some energy · step-free',theo:'yes'},{t:'Late screening, whatever is on',m:'$10 · 110 min · low energy · seated',theo:'maybe'},{t:'Saturday market, then the long way home',m:'free · 2.5 h · some energy · outside',theo:'pass'}];
+  var list=document.getElementById('d-decide-list'),out=document.getElementById('d-decide-out'),mine={};
+  function paint(){
+    list.innerHTML=ideas.map(function(it,i){return '<div class="card" style="padding:12px 14px"><b>'+it.t+'</b><div class="small muted" style="margin:2px 0 8px">'+it.m+'</div><div class="vote" role="group" aria-label="'+it.t+'">'+['yes','maybe','pass'].map(function(v){return '<button type="button" data-i="'+i+'" data-v="'+v+'" aria-pressed="'+(mine[i]===v)+'">'+(v==='yes'?'Yes':v==='maybe'?'Maybe':'Pass')+'</button>'}).join('')+'</div></div>'}).join('');
+    list.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){mine[b.getAttribute('data-i')]=b.getAttribute('data-v');paint();})});
+    var done=Object.keys(mine).length===ideas.length;
+    if(!done){out.className='result';out.innerHTML='<span class="sealed">Theo\'s votes are sealed · '+Object.keys(mine).length+' of 3 answered</span>';return;}
+    var plans=[],maybes=[];
+    ideas.forEach(function(it,i){if(mine[i]==='yes'&&it.theo==='yes')plans.push(it.t);else if(mine[i]!=='pass'&&it.theo!=='pass')maybes.push(it.t);});
+    var h='';
+    if(plans.length){h+='<p><b>A plan:</b> '+plans.join('; ')+'. It goes to Upcoming with a name against it.</p>';}
+    if(maybes.length){h+='<p class="small" style="margin-top:6px">A maybe between you: '+maybes.join('; ')+'. Left on the list.</p>';}
+    if(!plans.length&&!maybes.length){h+='<p>Nothing agreed this week. Nothing is shown as a rejection; the passed ideas just stop appearing.</p>';}
+    h+='<p class="small muted" style="margin-top:6px">Anything either of you passed on is not listed and never will be.</p>';
+    out.className='result'+(plans.length?' yes':'');out.innerHTML=h;
+  }
+  document.getElementById('d-decide-reset').addEventListener('click',function(){mine={};paint();});
+  paint();
+})();
+</script>
+</body></html>

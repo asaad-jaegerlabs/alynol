@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Evermore Walkthrough</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..600,0..100,0..1&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--paper:#F4EFE6;--paper-2:#EAE2D4;--paper-3:#DED3C0;--white:#FFFDF8;--ink:#1D1B18;--ink-2:#4A453D;--ink-3:#6B675C;--rule:#CBBFAB;--clay:#B8543A;--apricot:#EE9A7C;--apricot-2:#E9C9A4;--forest:#26322A;--moss:#46574A;--night:#171613;--night-ink:#EFE7DA;--ok:#2F5A3A;--f-d:"Fraunces",Georgia,serif;--f-t:"Instrument Sans",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#16160F;--paper-2:#1E1D16;--paper-3:#27261D;--white:#1B1A13;--ink:#F2ECE0;--ink-2:#DDD5C6;--ink-3:#A39C8C;--rule:#35342A;--clay:#E08A68;--apricot:#EE9A7C;--apricot-2:#B88A66;--forest:#2E3B31;--moss:#8FA892;--ok:#9CC7A5;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#16160F;--paper-2:#1E1D16;--paper-3:#27261D;--white:#1B1A13;--ink:#F2ECE0;--ink-2:#DDD5C6;--ink-3:#A39C8C;--rule:#35342A;--clay:#E08A68;--apricot:#EE9A7C;--apricot-2:#B88A66;--forest:#2E3B31;--moss:#8FA892;--ok:#9CC7A5;color-scheme:dark}
+*{box-sizing:border-box}html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 var(--f-t);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:env(safe-area-inset-top,0px) env(safe-area-inset-bottom,0px)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+h1,h2,h3{font-family:var(--f-d);font-weight:500;line-height:1.1;margin:0;text-wrap:balance}
+h1{font-size:30px;font-variation-settings:"opsz" 96,"SOFT" 30,"WONK" 1}h2{font-size:24px}h3{font-size:19px}
+p{margin:0}a{color:var(--clay)}
+:focus-visible{outline:3px solid #0F62C9;outline-offset:3px}
+.shell{max-width:760px;margin:0 auto;padding-block:18px 60px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:8px;font-family:var(--f-d);font-size:20px;text-decoration:none;color:var(--ink)}
+.small{font-size:13.5px}.muted{color:var(--ink-3)}
+.tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--rule);scrollbar-width:none;margin-bottom:22px}
+.tabs button{flex:none;background:none;border:0;border-bottom:2px solid transparent;padding:10px 12px;font:600 14px var(--f-t);color:var(--ink-3);cursor:pointer;min-height:44px}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--clay)}
+.tabs button:disabled{opacity:.45;cursor:not-allowed}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:8px}
+.lede{color:var(--ink-2);margin-top:8px;max-width:62ch}
+.card{background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:16px;margin-top:14px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);border:0;border-radius:999px;padding:11px 18px;font:600 14px var(--f-t);cursor:pointer;min-height:44px;text-decoration:none}
+.btn.peach{background:var(--apricot);color:#2A1F14}.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--rule)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.opt{display:grid;gap:8px;margin-top:10px}
+.opt label{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--rule);border-radius:4px;padding:12px;background:var(--white);cursor:pointer}
+.opt label:has(input:checked){border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.half{border-radius:4px;padding:16px;cursor:pointer;border:2px solid transparent;text-align:left;font:inherit;width:100%}
+.half.a{background:var(--forest);color:#F1EADD}.half.b{background:var(--apricot-2);color:#2A1F14}.half.c{background:var(--white);color:var(--ink);border-color:var(--rule)}
+.half[aria-pressed="true"]{border-color:var(--clay);box-shadow:0 0 0 2px var(--clay)}
+.half b{font-family:var(--f-d);font-size:20px;font-weight:500;display:block}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.vote{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.vote button{border:1px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:999px;padding:8px 14px;font:600 14px var(--f-t);cursor:pointer;min-height:40px}
+.vote button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.sealed{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-3)}
+.sealed::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--apricot);box-shadow:inset 0 0 0 3px var(--white);flex:none}
+.result{margin-top:10px;padding:10px 12px;border-radius:4px;background:var(--paper-2);font-size:14.5px}
+.result.yes{background:#DDE9DF;color:var(--ok)}
+:root[data-theme="dark"] .result.yes{background:#2A3D2E;color:#B6D7BC}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .result.yes{background:#2A3D2E;color:#B6D7BC}}
+.letter{background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:18px;position:relative;overflow:hidden}
+.letter::before{content:"";position:absolute;inset:0 0 auto;height:6px;background:linear-gradient(90deg,var(--forest) 50%,var(--apricot-2) 50%)}
+.letter .name{font-family:var(--f-d);font-size:28px;margin-top:8px}
+.seal{width:64px;height:64px;margin:12px auto;position:relative}
+.seal svg{width:100%;height:100%}
+.seal .l,.seal .r{transition:transform .65s cubic-bezier(.16,.84,.26,1)}
+.seal.open .l{transform:translateX(-6px)}.seal.open .r{transform:translateX(6px)}
+.meter{height:10px;background:var(--paper-3);border-radius:999px;overflow:hidden;margin-top:6px}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--moss),#8FA892);transition:width .65s}
+.stage{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:center}
+.stage img{width:96px;height:96px;border-radius:4px;object-fit:cover}
+textarea,input[type=text],input[type=date],select{width:100%;border:1px solid var(--rule);border-radius:4px;padding:10px;font:15px var(--f-t);background:var(--paper);color:var(--ink)}
+label.f{display:block;font-weight:600;font-size:14px;margin-top:10px}
+.sub{display:flex;gap:4px;flex-wrap:wrap;margin:14px 0 4px}
+.sub button{border:1px solid var(--rule);background:var(--white);color:var(--ink-2);border-radius:999px;padding:7px 12px;font:600 13px var(--f-t);cursor:pointer;min-height:36px}
+.sub button[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;background:var(--paper-2);font-size:12.5px;margin:2px 4px 2px 0}
+.type{font-family:var(--f-d);font-size:17px;line-height:1.5}
+.note{border-left:3px solid var(--clay);padding:10px 14px;background:var(--white);margin-top:14px;font-size:14px}
+pre{white-space:pre-wrap;word-break:break-word;font-size:12px;background:var(--paper-2);padding:12px;border-radius:4px;max-height:260px;overflow:auto}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="shell">
+<div class="top">
+<a class="brand" href="index.html"><svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 30V16a12 12 0 0 1 12-12v26z" fill="#26322A"/><path d="M28 30V16A12 12 0 0 0 16 4v26z" fill="#EE9A7C"/><rect x="15.4" y="4" width="1.2" height="26" fill="#F4EFE6"/></svg>Evermore · walkthrough</a>
+<div class="small muted">Demo. Everything stays on this device. Your partner, Theo, is scripted and fictional. <button class="btn ghost" type="button" id="reset" style="min-height:32px;padding:4px 12px;font-size:13px;margin-left:6px">Start over</button></div>
+</div>
+<div class="tabs" role="tablist" aria-label="Chapters">
+<button role="tab" data-t="door" aria-selected="true">0 · Doorway</button>
+<button role="tab" data-t="letters">1 · Letters</button>
+<button role="tab" data-t="garden">2 · Garden</button>
+<button role="tab" data-t="bridge">3 · Bridge</button>
+<button role="tab" data-t="together">4 · Together</button>
+</div>
+<main id="view"></main>
+</div>
+<script>
+(function(){
+var S;var KEY='evermore-demo-v1';
+function load(){try{var s=localStorage.getItem(KEY);S=s?JSON.parse(s):null}catch(e){S=null}if(!S)S=fresh();}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function fresh(){return {tab:'door',name:'',role:'',open:'',q:{},seed:'',letters:{},sealed:false,acts:{},pts:0,bridge:'',dates:{},plan:null,met:false,pair:false,ideas:{},myIdeas:[],notes:[],memories:[]};}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+var $=function(s,el){return (el||document).querySelector(s)};
+var view=$('#view');
+var LETTERS=[{id:'theo',n:'Theo',side:'Builds the career',line:['children ✓','one income ✓','timeline ≈'],spark:'You both believe in talking things through.',theo:'yes'},{id:'mina',n:'Mina',side:'Builds the career',line:['children ≈','one income ✓','timeline ✓'],spark:'Your weekends are all about cosy downtime.',theo:'pass'},{id:'sam',n:'Sam',side:'In between',line:['children ✓','one income ≈','timeline ≈'],spark:'You share a core value: loyalty.',theo:'yes'}];
+var ACTS=[{id:'quick',n:'Quick Fire',st:'Discovery',pts:10,q:'Morning routine: early bird or night owl?',opts:['Early bird','Night owl'],theo:'Night owl',mode:'score'},{id:'perfect',n:'Perfect Day',st:'Discovery',pts:10,q:'Describe your perfect day, morning to night.',theo:'Up before anyone else, a long run by the river, then pancakes I have no business attempting. A bookshop in the afternoon and nowhere to be.',mode:'letter'},{id:'wyr',n:'Would You Rather: Values',st:'Play',pts:10,q:'A job you love that pays average, or a job you tolerate that pays amazingly?',opts:['Love it, average pay','Tolerate it, amazing pay'],theo:'Love it, average pay',mode:'drama'},{id:'realme',n:'The Real Me',st:'Depth',pts:15,q:'What is your most treasured memory?',theo:'My grandmother teaching me to make bread at five in the morning, both of us pretending the rest of the house was not asleep.',mode:'letter'}];
+var DATES=[{t:'Quiet walk, then coffee',m:'free · 90 min · low energy · public · step-free',theo:'yes'},{t:'Hand-building night at a ceramics studio',m:'$25 · 2 h · some energy · seated',theo:'maybe'},{t:'Board game café',m:'$12 · 2 h · low energy · indoors',theo:'pass'}];
+var IDEAS=[{id:'i1',t:'Saturday market, then the long way home',m:'free · 2.5 h · some · outside',theo:'yes'},{id:'i2',t:'Late screening, whatever is on',m:'$10 · 110 min · low · seated',theo:'yes'},{id:'i3',t:'Cook the thing that always goes wrong',m:'$8 · 90 min · low · at home',theo:'maybe'},{id:'i4',t:'Long weekend, borrowed cottage (trip)',m:'$$ · 3 days · dreaming',theo:'pass'}];
+function stageOf(p){return p>=110?'Bloom':p>=70?'Bud':p>=30?'Sprout':'Seed'}
+function stageImg(p){var s=stageOf(p).toLowerCase();return 'img/eden-stage'+(s==='seed'?1:s==='sprout'?2:s==='bud'?3:4)+'-'+s+'.jpg'}
+function sealSVG(open){return '<div class="seal'+(open?'':' open')+'" aria-hidden="true"><svg viewBox="0 0 32 32"><path class="l" d="M4 30V16a12 12 0 0 1 12-12v26z" fill="#26322A"/><path class="r" d="M28 30V16A12 12 0 0 0 16 4v26z" fill="#EE9A7C"/>'+(open?'<circle cx="16" cy="19" r="5" fill="#F4EFE6"/><circle cx="16" cy="19" r="2.2" fill="#B8543A"/>':'')+'</svg></div>'}
+
+function door(){
+ var h='<div class="eyebrow">Chapter 0 · Doorway</div><h1>Everything difficult happens first.</h1><p class="lede">Your name, which half feels like yours, who you are open to meeting, one serious question, and a seed. In the real app the three short games follow before the first garden.</p>';
+ h+='<div class="card"><label class="f" for="nm">Your first name (shown to introductions)</label><input type="text" id="nm" maxlength="24" value="'+esc(S.name)+'" placeholder="e.g. Mina"></div>';
+ h+='<div class="card"><h3>Which half feels like yours?</h3><p class="small muted">Either role. Any gender. Both chosen, never assigned. You can change this before your first match.</p><div class="g2" style="margin-top:12px">'+
+ ['a|career|I build the career|I want to lead with financial provision while we create a home together.','b|home|I run the home|I want to build our everyday life, care and rhythms at home.','c|between|Something in between|Or not how we think about it. You still get letters, matched on what you both answered.'].map(function(x){var p=x.split('|');return '<button type="button" class="half '+p[0]+'" data-role="'+p[1]+'" aria-pressed="'+(S.role===p[1])+'"><b>'+p[2]+'</b><span class="small">'+p[3]+'</span></button>'}).join('')+'</div></div>';
+ h+='<div class="card"><h3>Who are you open to meeting?</h3><p class="small muted">Declared by you, never inferred from your role.</p><div class="vote" role="group">'+['Women','Men','Either'].map(function(v){return '<button type="button" data-open="'+v+'" aria-pressed="'+(S.open===v)+'">'+v+'</button>'}).join('')+'</div></div>';
+ h+='<div class="card"><div class="eyebrow">Children · question 1 of 4</div><h3>What do you hope your family looks like?</h3><p class="small muted">This answer helps filter incompatible plans. No other member can see it.</p><div class="opt">'+['No children','1–2 children','3–4 children','5+ / open to more'].map(function(o){return '<label><input type="radio" name="kids" value="'+o+'" '+(S.q.kids===o?'checked':'')+'> <span>'+o+'</span></label>'}).join('')+'</div></div>';
+ h+='<div class="card"><h3>Choose your seed</h3><p class="small muted">Your icon in every garden, and the colour of your plant.</p><div class="vote" role="group">'+[['Rose','The classic.'],['Lavender','Calm, takes its time.'],['Sunflower','Bright, hard to ignore.'],['Ivy','Slow burn, holds on.']].map(function(s){return '<button type="button" data-seed="'+s[0]+'" aria-pressed="'+(S.seed===s[0])+'" title="'+s[1]+'">'+s[0]+'</button>'}).join('')+'</div><img src="img/eden-seeds-all-four-types.jpg" alt="Four seeds: rose, lavender, sunflower, ivy" width="700" height="700" style="max-width:220px;height:auto;margin-top:12px;border-radius:4px"></div>';
+ var ok=S.name&&S.role&&S.open&&S.q.kids&&S.seed;
+ h+='<div class="row"><button class="btn" type="button" id="door-go" '+(ok?'':'disabled')+'>Continue to today\'s letters →</button><span class="small muted">'+(ok?'Your answers are private. Compatibility is mutual.':'Fill in each part to continue.')+'</span></div>';
+ view.innerHTML=h;
+ $('#nm').addEventListener('input',function(e){S.name=e.target.value;save();$('#door-go').disabled=!(S.name&&S.role&&S.open&&S.q.kids&&S.seed)});
+ view.querySelectorAll('[data-role]').forEach(function(b){b.addEventListener('click',function(){S.role=b.getAttribute('data-role');save();door()})});
+ view.querySelectorAll('[data-open]').forEach(function(b){b.addEventListener('click',function(){S.open=b.getAttribute('data-open');save();door()})});
+ view.querySelectorAll('input[name=kids]').forEach(function(r){r.addEventListener('change',function(){S.q.kids=r.value;save();door()})});
+ view.querySelectorAll('[data-seed]').forEach(function(b){b.addEventListener('click',function(){S.seed=b.getAttribute('data-seed');save();door()})});
+ var go=$('#door-go');if(go)go.addEventListener('click',function(){S.tab='letters';save();render()});
+}
+function letters(){
+ var h='<div class="eyebrow">Chapter 1 · Letters</div><h1>Up to three people. No swiping.</h1><p class="lede">First name and side only. A yes is private until it is mutual; a pass is never shown to anyone. Theo, Mina and Sam have already answered about you.</p>';
+ LETTERS.forEach(function(L){
+  var mine=S.letters[L.id];
+  h+='<div class="letter" style="margin-top:14px"><div class="eyebrow">Today\'s letter</div><div class="name">'+L.n+'</div><p class="small muted">'+L.side+' · Dallas–Fort Worth</p><p class="small" style="margin-top:8px">Where you line up: '+L.line.join(' · ')+'</p><p class="small" style="font-style:italic;margin-top:4px">“'+L.spark+'”</p>';
+  if(!mine){h+='<div class="vote" role="group" aria-label="Your answer to '+L.n+'"><button type="button" data-l="'+L.id+'" data-v="pass">Pass</button><button type="button" data-l="'+L.id+'" data-v="yes">I\'m interested</button></div><div class="result"><span class="sealed">'+L.n+'\'s answer is sealed</span></div>';}
+  else if(mine==='yes'&&L.theo==='yes'){h+=sealSVG(true)+'<div class="result yes"><b>You both said yes.</b> A beginning, not a promise. '+(L.id==='theo'?'A garden is planted with both seeds; the Garden tab is open.':'Another garden begins. With three or more growing, the app asks whether you have the time.')+'</div>';}
+  else if(mine==='yes'){h+='<div class="result"><span class="sealed">Your yes is private until '+L.n+' answers.</span> If they pass, this letter simply stops appearing.</div>';}
+  else {h+='<div class="result"><span class="sealed">Passed.</span> '+L.n+' is never told. Their answer stays sealed for good.</div>';}
+  h+='</div>';
+ });
+ h+='<div class="note">Honest states in the real app: “not quite ready in your area” with no date, counts shown only at five or more, “no more letters today”, and your two invitation codes as the way to help.</div>';
+ if(S.sealed)h+='<div class="row"><button class="btn peach" type="button" id="to-garden">Open the garden with Theo →</button></div>';
+ view.innerHTML=h;
+ view.querySelectorAll('[data-l]').forEach(function(b){b.addEventListener('click',function(){var id=b.getAttribute('data-l'),v=b.getAttribute('data-v');S.letters[id]=v;if(id==='theo'&&v==='yes')S.sealed=true;save();letters();})});
+ var g=$('#to-garden');if(g)g.addEventListener('click',function(){S.tab='garden';save();render()});
+}
+function garden(){
+ var h='<div class="eyebrow">Chapter 2 · The Garden · you and Theo</div><h1>Neither of you sees an answer until both have written one.</h1>';
+ var p=S.pts,st=stageOf(p),next=p>=110?null:p>=70?110:p>=30?70:30;
+ h+='<div class="card"><div class="stage"><img src="'+stageImg(p)+'" alt="'+st+' stage illustration"><div><h2>'+st+'</h2><p class="small muted">'+({Seed:'Just matched. Everything is still to come.',Sprout:'Something is forming. Keep going.',Bud:'You are getting somewhere. The real stuff is starting.',Bloom:'You have put in the work. Ready to meet?'})[st]+'</p><div class="small" style="margin-top:8px;display:flex;justify-content:space-between"><span>'+p+' pts · '+S.seed+' + Lavender</span><span>'+(next?(next-p)+' to '+stageOf(next):'In full bloom')+'</span></div><div class="meter"><i style="width:'+Math.min(100,p/110*100)+'%"></i></div></div></div></div>';
+ h+='<div class="card"><div class="eyebrow">Today\'s question</div><p class="type">What is a hill you will die on, that nobody else cares about?</p><p class="small muted" style="margin-top:6px">No streak, no pressure. Just a thought for today. Theo has answered; you will both see it after you do.</p></div>';
+ ACTS.forEach(function(A){
+  var done=S.acts[A.id];
+  h+='<div class="card"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><span class="pill">'+A.st+'</span><span class="pill">'+A.pts+' pts</span><h3 style="margin-top:6px">'+A.n+'</h3></div>'+(done?'<span class="sealed" style="color:var(--ok)">Both answered</span>':'<span class="sealed">Theo has answered</span>')+'</div>';
+  if(!done){
+   h+='<p style="margin-top:8px">'+A.q+'</p>';
+   if(A.opts){h+='<div class="vote" role="group">'+A.opts.map(function(o){return '<button type="button" data-a="'+A.id+'" data-o="'+esc(o)+'">'+o+'</button>'}).join('')+'</div>';}
+   else{h+='<textarea rows="3" maxlength="240" id="ta-'+A.id+'" placeholder="Only Theo sees this, and only after he has written his."></textarea><div class="row"><button class="btn" type="button" data-a="'+A.id+'" data-ta="1">Submit</button></div>';}
+  } else {
+   h+='<div class="result"><p class="small" style="font-weight:600">You</p><p>'+esc(done)+'</p><p class="small" style="font-weight:600;margin-top:8px">Theo</p><p class="type">'+esc(A.theo)+'</p>'+(A.mode==='score'?'<p class="small muted" style="margin-top:6px">'+(done===A.theo?'1/1 matched. You are in sync.':'0/1 matched. Different, and now you know.')+'</p>':A.mode==='drama'?'<p class="small muted" style="margin-top:6px">'+(done===A.theo?'Same answer. Debate time anyway?':'Different answers. Debate time.')+'</p>':'')+'</div>';
+  }
+  h+='</div>';
+ });
+ if(p>=30)h+='<div class="card" style="background:var(--apricot-2);color:#2A1F14;border-color:transparent"><h3>Ready to see each other?</h3><p class="small">Share a photo with Theo. Both of you must opt in before either sees the other\'s. <button type="button" class="btn ghost" style="margin-left:8px;min-height:36px;padding:6px 12px;font-size:13px;color:#2A1F14;border-color:#2A1F14" id="pw">'+(S.photo?'Theo also shared. Tap to reveal.':'Share a photo')+'</button></p></div>';
+ if(p>=30)h+='<div class="row"><button class="btn peach" type="button" id="to-bridge">'+(p>=110?'Your garden has bloomed. Let\'s do this →':'Ready to meet? See the bridge →')+'</button><span class="small muted">'+(p>=110?'':'Sometimes you just know. The bloom remains the ceremony.')+'</span></div>';
+ view.innerHTML=h;
+ view.querySelectorAll('[data-a]').forEach(function(b){b.addEventListener('click',function(){var id=b.getAttribute('data-a'),A=ACTS.filter(function(x){return x.id===id})[0];var ans=b.getAttribute('data-ta')?($('#ta-'+id).value||'').trim():b.getAttribute('data-o');if(!ans){$('#ta-'+id).focus();return;}S.acts[id]=ans;S.pts+=A.pts;save();garden();})});
+ var pw=$('#pw');if(pw)pw.addEventListener('click',function(){S.photo=true;save();garden()});
+ var tb=$('#to-bridge');if(tb)tb.addEventListener('click',function(){S.tab='bridge';save();render()});
+}
+function bridge(){
+ var h='<div class="eyebrow">Chapter 3 · The Bridge</div><h1>From a garden to a table.</h1><p class="lede">One bridge question, sealed. Then five first-date ideas scored for both of you (three here), decided yes / maybe / pass without anyone going first.</p>';
+ h+='<div class="card"><h3>What are you most looking forward to about meeting in person?</h3>'+(S.bridge?'<div class="result"><p class="small" style="font-weight:600">You</p><p>'+esc(S.bridge)+'</p><p class="small" style="font-weight:600;margin-top:8px">Theo</p><p class="type">Finding out whether you laugh the way I have been imagining you laugh.</p></div>':'<textarea id="br" rows="2" maxlength="200" placeholder="Sealed until Theo has answered too."></textarea><div class="row"><button class="btn" type="button" id="br-go">Submit</button><span class="sealed">Theo has answered</span></div>')+'</div>';
+ h+='<div class="card"><div class="eyebrow">Date designer · scored for both of you</div>';
+ DATES.forEach(function(D,i){h+='<div style="padding:10px 0;border-bottom:1px solid var(--rule)"><b>'+D.t+'</b><div class="small muted">'+D.m+(i===0?' · a low-pressure first meet':'')+'</div><div class="vote" role="group" aria-label="'+D.t+'">'+['yes','maybe','pass'].map(function(v){return '<button type="button" data-d="'+i+'" data-v="'+v+'" aria-pressed="'+(S.dates[i]===v)+'">'+v[0].toUpperCase()+v.slice(1)+'</button>'}).join('')+'</div></div>'});
+ var n=Object.keys(S.dates).length;
+ if(n<DATES.length)h+='<div class="result"><span class="sealed">Theo\'s votes are sealed · '+n+' of 3 answered</span></div>';
+ else{var plan=DATES.filter(function(D,i){return S.dates[i]==='yes'&&D.theo==='yes'});var maybe=DATES.filter(function(D,i){return !(S.dates[i]==='yes'&&D.theo==='yes')&&S.dates[i]!=='pass'&&D.theo!=='pass'});
+  if(plan.length){S.plan=plan[0].t;h+='<div class="result yes"><b>A plan:</b> '+plan[0].t+'. A public place, Saturday 11:00, Theo books. It goes to Upcoming.</div>';}
+  else{S.plan=null;h+='<div class="result">Nothing agreed yet.'+(maybe.length?' A maybe between you: '+maybe.map(function(m){return m.t}).join('; ')+'.':'')+' Nothing is shown as a rejection.</div>';}
+  save();}
+ h+='</div>';
+ h+='<div class="card"><h3>Intentions, co-authored and optional</h3><p class="small muted">Each of you proposes; nothing is on the road until both agree. Never a countdown.</p><div class="row">'+['Families meet early','Public first meetings','Boundaries stated','Exclusive from day one'].map(function(t){return '<span class="pill">'+t+' · proposed by Theo</span>'}).join('')+'</div></div>';
+ if(S.plan){h+='<div class="card"><h3>Meeting prep</h3><p class="small">One honest expectation each (sealed), a public-place reminder, an optional safety check-in. Afterwards:</p><div class="row"><button class="btn" type="button" id="met" '+(S.met?'disabled':'')+'>'+(S.met?'We met. Saved to the garden.':'We met! 🤝')+'</button></div>'+(S.met?'<div class="result yes" style="margin-top:12px">Milestone saved. A private debrief for each of you, a check-in tomorrow, and a question: <b>open a shared space together?</b> <button class="btn peach" type="button" id="to-tog" style="margin-left:8px;min-height:36px;padding:6px 12px;font-size:13px">Open Together →</button></div>':'')+'</div>';}
+ view.innerHTML=h;
+ var bg=$('#br-go');if(bg)bg.addEventListener('click',function(){var v=($('#br').value||'').trim();if(!v){$('#br').focus();return;}S.bridge=v;save();bridge();});
+ view.querySelectorAll('[data-d]').forEach(function(b){b.addEventListener('click',function(){S.dates[b.getAttribute('data-d')]=b.getAttribute('data-v');save();bridge();})});
+ var m=$('#met');if(m)m.addEventListener('click',function(){S.met=true;S.memories.unshift({t:'First met: '+S.plan,d:new Date().toISOString().slice(0,10)});save();bridge();});
+ var tt=$('#to-tog');if(tt)tt.addEventListener('click',function(){S.tab='together';save();render()});
+}
+function together(){
+ if(!S.pair){view.innerHTML='<div class="eyebrow">Chapter 4 · Together</div><h1>A shared space opens only when both of you turn it on.</h1><p class="lede">Nothing opens because you matched. Theo has turned it on. Your plans, trips, memories and notes stay on this device until you do; in the real app, a passphrase syncs the two of you.</p><div class="card"><div class="row"><button class="btn peach" type="button" id="pair">Turn on the shared space with Theo</button><span class="sealed">Theo has turned it on</span></div></div>';$('#pair').addEventListener('click',function(){S.pair=true;S.notes.unshift({t:'Right now we are just two people who matched on an app. In 30 days, I hope we…',open:addDays(30),from:'Time capsule, from the garden'});save();together()});return;}
+ var sub=S.sub||'today';
+ var h='<div class="eyebrow">Chapter 4 · Together · '+esc(S.name||'You')+' + Theo</div><h1>Useful at six weeks and at sixteen years.</h1>';
+ h+='<div class="sub" role="tablist">'+['today|Today','dates|Dates','upcoming|Upcoming','memories|Memories','notes|Notes','settings|Settings'].map(function(x){var p=x.split('|');return '<button role="tab" data-s="'+p[0]+'" aria-selected="'+(sub===p[0])+'">'+p[1]+'</button>'}).join('')+'</div>';
+ var all=IDEAS.concat(S.myIdeas);
+ var plans=all.filter(function(I){return S.ideas[I.id]==='yes'&&I.theo==='yes'});
+ var open=all.filter(function(I){return !S.ideas[I.id]});
+ if(sub==='today'){h+='<div class="card">'+(plans.length?'<div class="eyebrow">In 3 days</div><h2>'+esc(plans[0].t)+'</h2><p class="small muted">Saturday · Theo is booking</p>':'<b>Nothing in the diary.</b><p class="small muted">Agree on something in Dates and it will show up here.</p>')+'</div><div class="card"><div class="eyebrow">Waiting on an answer</div>'+(open.length?open.slice(0,3).map(function(I){return '<p>'+esc(I.t)+' <span class="sealed">sealed</span></p>'}).join(''):'<p class="small muted">All caught up.</p>')+'</div><div class="card"><div class="eyebrow">Today\'s prompt</div><p class="type">What would make this week feel less like admin?</p><p class="small muted">Answer it separately, then compare. The gap is usually the useful bit.</p></div>';}
+ if(sub==='dates'){h+='<div class="card"><div class="eyebrow">This week near you</div><p class="small muted">Real places, real dates, what they cost. Filters: category, energy, cost, distance, duration, access. Theo has voted on all of them.</p>'+all.map(function(I){var mine=S.ideas[I.id];var r=!mine?'<span class="sealed">Theo\'s answer is sealed</span>':(mine==='yes'&&I.theo==='yes')?'<span class="sealed" style="color:var(--ok)">A plan. In Upcoming.</span>':(mine==='pass'||I.theo==='pass')?'<span class="sealed">Not a match. It will stop coming up.</span>':'<span class="sealed">A maybe between you. Left on the list.</span>';return '<div style="padding:10px 0;border-bottom:1px solid var(--rule)"><b>'+esc(I.t)+'</b><div class="small muted">'+esc(I.m)+'</div><div class="vote" role="group">'+['yes','maybe','pass'].map(function(v){return '<button type="button" data-i="'+I.id+'" data-v="'+v+'" aria-pressed="'+(mine===v)+'">'+v[0].toUpperCase()+v.slice(1)+'</button>'}).join('')+'</div><div style="margin-top:6px">'+r+'</div></div>'}).join('')+'</div><div class="card"><h3>Add your own idea</h3><input type="text" id="newidea" maxlength="80" placeholder="Name something you keep meaning to do and never book."><div class="row"><button class="btn" type="button" id="addidea">Save idea</button><span class="small muted">Theo answers it in his own time.</span></div></div>';}
+ if(sub==='upcoming'){h+='<div class="card"><div class="eyebrow">Agreed</div>'+(plans.length?plans.map(function(I){return '<div style="padding:8px 0;border-bottom:1px solid var(--rule)"><b>'+esc(I.t)+'</b><div class="small muted">Saturday · Theo books · either of you can edit or cancel</div></div>'}).join(''):'<p class="small muted">Nothing agreed yet.</p>')+'<div class="row"><button class="btn ghost" type="button" id="ics">Show calendar file (.ics)</button></div><pre id="icsout" hidden></pre></div>';}
+ if(sub==='memories'){h+='<div class="card"><div class="eyebrow">The collection</div>'+(S.memories.length?S.memories.map(function(m){return '<div style="padding:8px 0;border-bottom:1px solid var(--rule)"><b>'+esc(m.t)+'</b><div class="small muted">'+esc(m.d)+'</div></div>'}).join(''):'')+'<div style="padding:8px 0;border-bottom:1px solid var(--rule)"><b>The garden, from seed to '+stageOf(S.pts).toLowerCase()+'</b><div class="small muted">'+Object.keys(S.acts).length+' activities, both answers kept. Your memory book is the first chapter.</div></div><h3 style="margin-top:14px">Add a memory</h3><input type="text" id="mem" maxlength="120" placeholder="A line about what happened."><div class="row"><button class="btn" type="button" id="addmem">Keep it</button></div></div>';}
+ if(sub==='notes'){h+='<div class="card"><div class="eyebrow">Notes for later</div><p class="small muted">Write something now, set the date it opens. Sealed from both of you until then.</p>'+S.notes.map(function(n){return '<div style="padding:10px 0;border-bottom:1px solid var(--rule)"><span class="sealed">Sealed until '+esc(n.open)+'</span>'+(n.from?'<div class="small muted">'+esc(n.from)+'</div>':'')+'</div>'}).join('')+'<label class="f" for="nt">A note</label><textarea id="nt" rows="2" maxlength="300" placeholder="For a week that is going badly."></textarea><label class="f" for="nd">Opens on</label><input type="date" id="nd" value="'+addDays(90)+'"><div class="row"><button class="btn" type="button" id="addnote">Seal it</button></div></div>';}
+ if(sub==='settings'){h+='<div class="card"><h3>Your data</h3><p class="small muted">Export everything you put in as plain JSON, readable without Evermore. Delete everything on this device. In the real app, closing a shared space leaves each person with their own side.</p><div class="row"><button class="btn ghost" type="button" id="exp">Show export</button><button class="btn ghost" type="button" id="del">Delete everything on this device</button></div><pre id="expout" hidden></pre></div><div class="card"><h3>Things this will never do</h3><p class="small">No scores. No streaks or guilt. No one-sided reveal. No faces first. No fake anything. No read receipts. No assigned roles. No hostage history.</p></div>';}
+ view.innerHTML=h;
+ view.querySelectorAll('[data-s]').forEach(function(b){b.addEventListener('click',function(){S.sub=b.getAttribute('data-s');save();together()})});
+ view.querySelectorAll('[data-i]').forEach(function(b){b.addEventListener('click',function(){S.ideas[b.getAttribute('data-i')]=b.getAttribute('data-v');save();together()})});
+ var ai=$('#addidea');if(ai)ai.addEventListener('click',function(){var v=($('#newidea').value||'').trim();if(!v)return;S.myIdeas.push({id:'m'+Date.now(),t:v,m:'your idea · unfiltered',theo:['yes','maybe'][S.myIdeas.length%2]});save();together()});
+ var am=$('#addmem');if(am)am.addEventListener('click',function(){var v=($('#mem').value||'').trim();if(!v)return;S.memories.unshift({t:v,d:new Date().toISOString().slice(0,10)});save();together()});
+ var an=$('#addnote');if(an)an.addEventListener('click',function(){var v=($('#nt').value||'').trim();if(!v)return;S.notes.unshift({t:v,open:$('#nd').value||addDays(90)});save();together()});
+ var ics=$('#ics');if(ics)ics.addEventListener('click',function(){var o=$('#icsout');o.hidden=false;o.textContent='BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Evermore//Together//EN\n'+plans.map(function(I){return 'BEGIN:VEVENT\nSUMMARY:'+I.t+'\nDTSTART;VALUE=DATE:'+addDays(3).replace(/-/g,'')+'\nDESCRIPTION:Theo books\nEND:VEVENT'}).join('\n')+'\nEND:VCALENDAR';});
+ var ex=$('#exp');if(ex)ex.addEventListener('click',function(){var o=$('#expout');o.hidden=false;o.textContent=JSON.stringify(S,null,2)});
+ var dl=$('#del');if(dl)dl.addEventListener('click',function(){if(dl.textContent.indexOf('Confirm')<0){dl.textContent='Confirm: delete everything on this device';return;}try{localStorage.removeItem(KEY)}catch(e){}S=fresh();render();});
+}
+function addDays(n){var d=new Date();d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)}
+function render(){
+ document.querySelectorAll('.tabs [data-t]').forEach(function(b){var t=b.getAttribute('data-t');b.setAttribute('aria-selected',S.tab===t);b.disabled=(t==='garden'&&!S.sealed)||(t==='bridge'&&S.pts<30)||(t==='together'&&!S.met);});
+ ({door:door,letters:letters,garden:garden,bridge:bridge,together:together})[S.tab]();
+ window.scrollTo({top:0});
+}
+document.querySelectorAll('.tabs [data-t]').forEach(function(b){b.addEventListener('click',function(){if(b.disabled)return;S.tab=b.getAttribute('data-t');save();render()})});
+$('#reset').addEventListener('click',function(){try{localStorage.removeItem(KEY)}catch(e){}S=fresh();render()});
+load();render();
+})();
+</script>
+</body>
+</html>
